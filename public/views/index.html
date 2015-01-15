@@ -7,7 +7,7 @@
 	    <title>FeedMe</title>
 
 	    <!-- CSS -->
-	    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="libs/bootstrap/themes/united/bootstrap.min.css">
 	    <link rel="stylesheet" href="css/style.css">
 
 	    <!-- JS -->
@@ -22,12 +22,12 @@
 	    <script src="js/app.js"></script>
 	</head>
 	<body ng-app="feedMe" ng-controller="HomeController">
-		<div class="container">
 
-		    <!-- HEADER -->
-		    <nav class="navbar navbar-inverse">
+	    <!-- HEADER -->
+	    <nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
 		        <div class="navbar-header">
-		            <a class="navbar-brand" href="/">FeedMe: It's what's for dinner</a>
+		            <a class="navbar-brand" href="/">FeedMe</a>
 		        </div>
 
 		        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
@@ -38,7 +38,6 @@
 
 		    <!-- ANGULAR DYNAMIC CONTENT -->
 		    <div ng-view></div>
-
 		</div>
 	</body>
 </html>
