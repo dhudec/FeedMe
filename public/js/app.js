@@ -1,0 +1,1 @@
+angular.module('feedMe', ['ngRoute', 'appRoutes', 'HomeCtrl', 'RecipesCtrl', 'RecipeService']);
