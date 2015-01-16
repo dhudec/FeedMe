@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Recipe', {
-	name: {type: String, default: ''}
-})
+var Recipe = new mongoose.Schema({
+	name: {type: String, required: true}
+});
+
+module.exports = mongoose.model('Recipe', Recipe);
