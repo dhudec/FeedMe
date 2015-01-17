@@ -1,1 +1,1 @@
-angular.module('feedMe', ['ngRoute', 'appRoutes', 'HomeCtrl', 'RecipesCtrl', 'RecipeService']);
+angular.module('feedMe', ['ngRoute', 'appRoutes', 'HomeCtrl', 'RecipeListCtrl', 'RecipeService']);

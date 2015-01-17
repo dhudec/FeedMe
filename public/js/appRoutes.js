@@ -5,8 +5,8 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'HomeController'
         })
         .when('/recipes', {
-            templateUrl: 'views/recipes.html',
-            controller: 'RecipesController'
+            templateUrl: 'views/recipe-list.html',
+            controller: 'RecipeListController'
         });
 
     $locationProvider.html5Mode(true);

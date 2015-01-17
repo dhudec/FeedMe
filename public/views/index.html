@@ -1,43 +1,44 @@
 <!doctype html>
-<html lang="en">
+<html>
 	<head>
-	    <meta charset="UTF-8">
-	    <base href="/">
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  		<base href="/">
 
 	    <title>FeedMe</title>
 
 	    <!-- CSS -->
-	    <link rel="stylesheet" href="libs/bootstrap/themes/united/bootstrap.min.css">
-	    <link rel="stylesheet" href="css/style.css">
+	    <link rel="stylesheet" type="text/css" href="libs/bootstrap/themes/united/bootstrap.min.css">
+	    <link rel="stylesheet" type="text/css" href="css/style.css">
 
 	    <!-- JS -->
-	    <script src="libs/angular/angular.min.js"></script>
-	    <script src="libs/angular-route/angular-route.min.js"></script>
+	    <script type="text/javascript" src="libs/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="libs/angular-route/angular-route.min.js"></script>
 
 	    <!-- ANGULAR CUSTOM -->
-	    <script src="js/controllers/HomeCtrl.js"></script>
-	    <script src="js/controllers/RecipesCtrl.js"></script>
-	    <script src="js/services/RecipeService.js"></script>
-	    <script src="js/appRoutes.js"></script>
-	    <script src="js/app.js"></script>
+	    <script type="text/javascript" src="js/controllers/HomeCtrl.js"></script>
+	    <script type="text/javascript" src="js/controllers/RecipeListCtrl.js"></script>
+	    <script type="text/javascript" src="js/services/RecipeService.js"></script>
+	    <script type="text/javascript" src="js/appRoutes.js"></script>
+	    <script type="text/javascript" src="js/app.js"></script>
 	</head>
-	<body ng-app="feedMe" ng-controller="HomeController">
+	<body>
+		<div ng-app="feedMe" ng-controller="HomeController">
+		    <!-- HEADER -->
+		    <nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+			        <div class="navbar-header">
+			            <a class="navbar-brand" href="/">FeedMe</a>
+			        </div>
 
-	    <!-- HEADER -->
-	    <nav class="navbar navbar-default navbar-fixed-top">
-			<div class="container">
-		        <div class="navbar-header">
-		            <a class="navbar-brand" href="/">FeedMe</a>
+			        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+			        <ul class="nav navbar-nav">
+			            <li><a href="/recipes">Recipes</a></li>
+			        </ul>
 		        </div>
-
-		        <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
-		        <ul class="nav navbar-nav">
-		            <li><a href="/recipes">Recipes</a></li>
-		        </ul>
 		    </nav>
 
-		    <!-- ANGULAR DYNAMIC CONTENT -->
+			    <!-- ANGULAR DYNAMIC CONTENT -->
 		    <div ng-view></div>
 		</div>
 	</body>
-</html>
+</html>	
