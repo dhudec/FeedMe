@@ -1,0 +1,12 @@
+<div>
+    <h1>New Recipe</h1>
+
+	<form name="recipeForm">
+	    <div class="form-group" ng-class="{ 'has-error': recipeForm.name.$invalid }" >
+    		<label for="name">Recipe Name:</label>
+	      	<input type="text" class="form-control" name="name" ng-model="recipe.name" required />
+	    </div>
+  </form>
+
+  <a class="btn btn-default" ng-click="create(recipe)">Create</a>
+</div>
