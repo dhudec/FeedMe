@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  		<base href="/">
+
+	    <title>FeedMe</title>
+
+	    <!-- CSS -->
+	    <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap/themes/united/bootstrap.min.css">
+	    <link rel="stylesheet" type="text/css" href="assets/css/site.css">
+
+	    <!-- JS -->
+	    <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="assets/libs/angular-route/angular-route.min.js"></script>
+
+	    <!-- ANGULAR CUSTOM -->
+	    <script type="text/javascript" src="app/home/home.module.js"></script>
+	    <script type="text/javascript" src="app/home/homeController.js"></script>
+	    <script type="text/javascript" src="app/recipes/recipes.module.js"></script>
+	    <script type="text/javascript" src="app/recipes/recipeListController.js"></script>
+	    <script type="text/javascript" src="app/recipes/recipeService.js"></script>
+	    <script type="text/javascript" src="app/recipes/recipeCategoryService.js"></script>	    
+	    <script type="text/javascript" src="app/app.routes.js"></script>
+	    <script type="text/javascript" src="app/app.module.js"></script>
+	</head>
+	<body ng-app="feedMe" ng-controller="HomeController">
+	    <nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+		        <div class="navbar-header">
+		            <a class="navbar-brand" href="/">FeedMe</a>
+		        </div>
+
+		        <ul class="nav navbar-nav">
+		            <li><a href="/recipes">Recipes</a></li>
+		        </ul>
+	        </div>
+	    </nav>
+
+	    <div ng-view class="container"></div>
+	</body>
+</html>	

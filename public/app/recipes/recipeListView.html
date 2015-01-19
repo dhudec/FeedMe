@@ -1,0 +1,11 @@
+<div>
+    <h1>Browse Recipes</h1>
+
+	<div class="row">
+   		<div ng-repeat="recipe in recipes" class="col-sm-3">
+		  <h4><b>{{ recipe.name }}</b></h4>
+		  <div><i>{{ recipe.description }}</i></div>
+		  <div>Time: {{ recipe.totalTime() }} minutes</div>
+		</div>
+	</div>
+</div>

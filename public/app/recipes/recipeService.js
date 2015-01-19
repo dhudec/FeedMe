@@ -1,4 +1,4 @@
-angular.module('RecipeService', []).factory('RecipeService', ['$http', function($http) {
+angular.module('recipes').factory('recipeService', ['$http', function($http) {
     return {
         get : function() {
             return $http.get('/api/recipes');

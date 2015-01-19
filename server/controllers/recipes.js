@@ -6,16 +6,12 @@ module.exports.controller = function(app) {
     app.get('/api/recipes', function(req, res) {
         log.info('Request received for GET /api/recipes');
         Recipe.find(function(err, recipes) {
-            try {
         	if (!err) {
         		res.json(recipes);
         	} else {
                 log.error(err);
                 res.sendStatus(500);
         	}
-        } catch (e) {
-            log.error(e);
-        }
         });
     });
 
@@ -37,7 +33,7 @@ module.exports.controller = function(app) {
         		res.json(recipe);
         	} else {
                 log.error(err);
-        		res.send(500);
+        		res.sendStatus(500);
         	}
         });
     });
