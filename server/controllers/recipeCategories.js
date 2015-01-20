@@ -48,12 +48,14 @@ module.exports.controller = function(app) {
         });
     });
 
-    app.delete('/api/recipeCategories', function(req, res) {
-        RecipeCategory.find(function(err, recipeCategories) {
-            if (err)
-                res.send(err);
-
-            res.json(recipeCategories);
+    app.delete('/api/recipeCategories/:id', function(req, res) {
+        RecipeCategory.findById(req.params.id).remove(function (err) {
+            if (!err) {
+                res.sendStatus(200);
+            } else {
+                log.error(err);
+                res.sendStatus(500);
+            }
         });
     });
 }
