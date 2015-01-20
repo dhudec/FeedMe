@@ -1,25 +1,25 @@
-/*describe('public.controllers.RecipeListController', function() {
-  beforeEach(module('FeedMe'));
+describe('public.controllers.RecipeListController', function() {
+  var $controller;  
 
-  var $controller;
-beforeEach(function () {
-  DataServiceMock= {}
-  DataServiceMock.doSomething = function() {}
-  module(function ($provide) {
-    $provide.value('DataService', DataServiceMock)
-  })
-})
-  beforeEach(inject(function(_$controller_){
-    // The injector unwraps the underscores (_) from around the parameter names when matching
-    $controller = _$controller_;
-  }));
+  beforeEach(function () {
+    module('recipes');
+    module('recipes.mock');
+
+    inject(function(_$controller_){
+      // The injector unwraps the underscores (_) from around the parameter names when matching
+      $controller = _$controller_;
+    });
+  });
 
   describe('$scope.totalTime', function() {
     it('should return sum of prepTime and cookTime', function() {
       var $scope = {};
       var controller = $controller('RecipeListController', { $scope: $scope });
-      $scope.recipes = [ { name: 'Test', prepTime: 10, cookTime: 20 }];
-      expect($scope.totalTime()).to.equal(30);
+      
+      expect($scope.recipes).to.not.be.a('null');
+      expect($scope.recipes).to.have.property('length', 2);
+      expect($scope.recipes[0].totalTime()).to.equal(3);
+      expect($scope.recipes[1].totalTime()).to.equal(7);
     });
   });
-});*/
+});

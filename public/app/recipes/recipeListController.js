@@ -1,6 +1,6 @@
 angular.module('recipes').controller('RecipeListController', function($scope, recipeService) {
 
-    recipeService.get().success(function(data, status, headers, config) {
+    recipeService.get().success(function(data) {
 	    $scope.recipes = data;
 
 	    $scope.recipes.forEach(function(recipe) {
