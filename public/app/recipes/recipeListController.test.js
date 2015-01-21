@@ -11,7 +11,18 @@ describe('public.controllers.RecipeListController', function() {
     });
   });
 
-  describe('$scope.totalTime', function() {
+  describe('$scope.recipes', function() {
+    it('should return the recipes returne by the recipe service', function() {
+      var $scope = {};
+      var controller = $controller('RecipeListController', { $scope: $scope });
+      
+      expect($scope.recipes).to.have.property('length', 2);
+      expect($scope.recipes[0].name).to.equal('recipe 1');
+      expect($scope.recipes[1].name).to.equal('recipe 2');
+    });
+  });
+
+  describe('$scope.recipes.totalTime', function() {
     it('should return sum of prepTime and cookTime', function() {
       var $scope = {};
       var controller = $controller('RecipeListController', { $scope: $scope });

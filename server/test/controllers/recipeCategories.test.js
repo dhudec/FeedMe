@@ -1,4 +1,5 @@
 var assert = require("chai").assert;
+var expect = assert.expect;
 var request = require('supertest');
 var mongoose = require('mongoose');
 
@@ -54,6 +55,32 @@ describe('server.controllers.recipeCategories', function(done) {
         assert.isTrue(res.body.length == 1);
         assert.equal(insertedCategory._id, res.body[0]._id);
         assert.equal(insertedCategory.name, res.body[0].name);
+        done();
+      });
+    });
+  });  
+
+  describe('PUT /api/recipecategories/id', function(){
+    it('should respond to bad request with 500 status', function(done){
+      request(server)
+      .put('/api/recipecategories/123')
+      .send({})
+      .expect(500, done);
+    });
+
+    it('should respond with 200 status and json with _id', function(done){
+      insertedCategory.name = 'new name';
+      
+      request(server)
+      .put('/api/recipecategories/' + insertedCategory._id)
+      .send(insertedCategory)
+      .expect(200)
+      .end(function (err, res) {
+        if (err)
+          console.log(err);
+
+        // check the response of the put request
+        assert.equal(insertedCategory.name, res.body.name);
         done();
       });
     });

@@ -8,6 +8,6 @@ var RecipeSchema = new mongoose.Schema({
     categories  : [ {type : mongoose.Schema.ObjectId, ref : 'RecipeCategory'} ]
 });
 
-RecipeSchema.index({'categories': 1})
+RecipeSchema.index({'categories': 1});
 
 module.exports = mongoose.model('Recipe', RecipeSchema);

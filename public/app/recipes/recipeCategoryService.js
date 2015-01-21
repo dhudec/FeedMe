@@ -1,15 +1,21 @@
 angular.module('recipes').factory('recipeCategoryService', ['$http', function($http) {
-    return {
-        get : function() {
-            return $http.get('/api/recipeCategories');
-        },
+    var service = {};
 
-        create : function(recipeCategoryData) {
-            return $http.post('/api/recipeCategories', recipeCategoryData);
-        },
+    service.get = function() {
+        return $http.get('/api/recipeCategories');
+    };
 
-        delete : function(id) {
-            return $http.delete('/api/recipeCategories/' + id);
-        }
+    service.create = function(recipeCategoryData) {
+        return $http.post('/api/recipeCategories', recipeCategoryData);
+    };
+
+    service.update = function (id, recipeCategoryData) {
+        return $http.put('/api/recipeCategories/' + id, recipeCategoryData);
     }
+
+    service.delete = function(id) {
+        return $http.delete('/api/recipeCategories/' + id);
+    }
+
+    return service;
 }]);

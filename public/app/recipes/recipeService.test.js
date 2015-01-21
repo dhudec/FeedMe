@@ -36,7 +36,7 @@ describe('public.services.recipeService', function () {
  
   describe('create', function(done) {
     it('should call post on the expected url, passing the parameter and returning the response', function () {
-      var requestData = { name: 'recipe 1', description: 'description 1', prepTime: 1, cookTime: 2 }
+      var requestData = { name: 'recipe 1', description: 'description 1', prepTime: 1, cookTime: 200 }
       var responseData = { name: 'recipe 1', description: 'description 1', prepTime: 1, cookTime: 2, _id: '1234567890' }
       
       httpBackend.expectPOST('/api/recipes', requestData).respond(200, responseData);

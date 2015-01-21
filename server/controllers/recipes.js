@@ -16,6 +16,7 @@ module.exports.controller = function(app) {
     });
 
     app.get('/api/recipes/:id', function(req, res) {
+        log.info('Request received for GET /api/recipes/' + req.params.id);
         return Recipe.findById(req.params.id, function (err, recipe) {
         	if (!err) {
         		res.json(recipe);
@@ -27,6 +28,7 @@ module.exports.controller = function(app) {
     });
 
     app.post('/api/recipes', function(req, res) {
+        log.info('Request received for POST /api/recipes');
     	var recipe = new Recipe(req.body);
         recipe.save(function(err) {
         	if (!err) {
@@ -38,21 +40,35 @@ module.exports.controller = function(app) {
         });
     });
 
-    app.put('/api/recipes', function(req, res) {
-        Recipe.find(function(err, recipes) {
-            if (err)
-                res.send(err);
+    app.put('/api/recipes/:id', function(req, res) {
+        log.info('Request received for PUT /api/recipes/' + req.params.id);
+        return Recipe.findById(req.params.id, function(err, recipe) {
+            recipe.name = req.body.name;
+            recipe.description = req.body.description;
+            recipe.prepTime = req.body.prepTime;
+            recipe.cookTime = req.body.cookTime;
+            recipe.categories = req.body.categories;
 
-            res.json(recipes);
+            return recipe.save(function(err) {
+              if (!err) {
+                res.json(recipe);
+              } else {
+                log.error(err);
+                res.sendStatus(500);
+              }
+            });
         });
     });
 
     app.delete('/api/recipes', function(req, res) {
-        Recipe.find(function(err, recipes) {
-            if (err)
-                res.send(err);
-
-            res.json(recipes);
+        log.info('Request received for DELETE /api/recipes');
+        Recipe.findById(req.params.id).remove(function (err) {
+            if (!err) {
+                res.sendStatus(200);
+            } else {
+                log.error(err);
+                res.sendStatus(500);
+            }
         });
     });
 }

@@ -53,6 +53,25 @@ describe('public.services.recipeCategoryService', function () {
     });  
   });
  
+  describe('update', function(done) {
+    it('should call put on the expected url, passing the parameter and returning the response', function () {
+      var requestData = { name: 'category 1', _id: 'a8b9ada8b9ada8b9ada8b9ad' }
+      var responseData = requestData;
+      httpBackend.expectPUT('/api/recipeCategories/a8b9ada8b9ada8b9ada8b9ad', requestData).respond(200, responseData);
+      
+      var returnedPromise = recipeCategoryService.update(requestData._id, requestData);
+      var result;
+      returnedPromise.then(function(response) {
+        result = response;
+      });
+      
+      httpBackend.flush();
+      
+      expect(result.status).to.eql(200);
+      expect(result.data).to.eql(responseData);
+    });  
+  });
+ 
   describe('delete', function(done) {
     it('should call delete on the expected url', function () {
       var id = 'af8329af8329af8329af8329';

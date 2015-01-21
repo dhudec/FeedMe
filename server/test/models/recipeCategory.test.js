@@ -42,4 +42,23 @@ describe('server.models.RecipeCategory', function(){
       });
     });
   });
+
+  it('should be able to update categories', function(done){
+    mockgoose.reset();
+    var category = { name: 'Beef' };
+    var categoryModel = new RecipeCategory(category);
+
+    categoryModel.save(function(err) {
+      expect(err).to.be.a('null');
+
+      RecipeCategory.find(function(err, categories) {
+        expect(err).to.be.a('null');
+        expect(categories.length).to.equal(1);
+
+        var firstCategory = categories[0];
+        expect(firstCategory.name).to.equal(category.name);
+        done();
+      });
+    });
+  });
 });
