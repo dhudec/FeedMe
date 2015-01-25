@@ -46,6 +46,16 @@ describe('public.controllers.RecipeCategoryController', function() {
       expect(recipeCategoryService.createWasCalled).to.equal(true);
     });
 
+    it('should set hasBeenSaved to true', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      $scope.addCategory();
+      var vm = $scope.categories[$scope.categories.length - 1];
+      expect(vm.hasBeenSaved()).to.equal(false);
+      vm.save();
+      expect(vm.hasBeenSaved()).to.equal(true);
+    });
+
     it('should call update on the recipeCategoryService for previously saved categories', function() {
       var $scope = {};
       var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
@@ -53,6 +63,27 @@ describe('public.controllers.RecipeCategoryController', function() {
       expect(recipeCategoryService.updateWasCalled).to.equal(false) ;
       vm.save();
       expect(recipeCategoryService.updateWasCalled).to.equal(true);
+    });
+  });
+
+  describe('$scope.categories.delete', function() {
+    it('should call delete on the recipeCategoryService', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      expect(recipeCategoryService.deleteWasCalled).to.equal(false);
+      vm.delete();
+      expect(recipeCategoryService.deleteWasCalled).to.equal(true);
+    });
+
+    it('should remove the deleted category from $scope.categories', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      var originalNumberOfCategories = $scope.categories.length;
+      vm.delete();
+      expect($scope.categories.length).to.equal(originalNumberOfCategories - 1);
+      expect($scope.categories.indexOf(vm)).to.equal(-1);
     });
   });
 });
