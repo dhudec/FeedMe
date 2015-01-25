@@ -7,7 +7,6 @@ describe('public.controllers.RecipeCategoryController', function() {
     module('recipes.mock');
 
     inject(function(_$controller_, _recipeCategoryService_) {
-      // The injector unwraps the underscores (_) from around the parameter names when matching
       $controller = _$controller_;
       recipeCategoryService = _recipeCategoryService_;
     });
@@ -31,7 +30,6 @@ describe('public.controllers.RecipeCategoryController', function() {
       expect($scope.categories).to.have.property('length', 3);
       $scope.addCategory();
       expect($scope.categories).to.have.property('length', 4);
-      expect($scope.categories[3].hasBeenSaved()).to.equal(false);
     });
   });
 
@@ -44,16 +42,6 @@ describe('public.controllers.RecipeCategoryController', function() {
       expect(recipeCategoryService.createWasCalled).to.equal(false);
       vm.save();
       expect(recipeCategoryService.createWasCalled).to.equal(true);
-    });
-
-    it('should set hasBeenSaved to true', function() {
-      var $scope = {};
-      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
-      $scope.addCategory();
-      var vm = $scope.categories[$scope.categories.length - 1];
-      expect(vm.hasBeenSaved()).to.equal(false);
-      vm.save();
-      expect(vm.hasBeenSaved()).to.equal(true);
     });
 
     it('should call update on the recipeCategoryService for previously saved categories', function() {
@@ -84,6 +72,69 @@ describe('public.controllers.RecipeCategoryController', function() {
       vm.delete();
       expect($scope.categories.length).to.equal(originalNumberOfCategories - 1);
       expect($scope.categories.indexOf(vm)).to.equal(-1);
+    });
+  });
+
+  describe('CRUD operation accessors', function() {
+    it('canEdit should be true except for new categories', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      expect(vm.canEdit()).to.equal(true);
+      $scope.addCategory();
+      vm = $scope.categories[$scope.categories.length -1];
+      expect(vm.canEdit()).to.equal(false);
+    });
+
+    it('isEditing should be false for saved categories', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      expect(vm.isEditing).to.equal(false);
+    });
+
+    it('isEditing should be true after calling edit', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      expect(vm.isEditing).to.equal(false);
+      vm.edit();
+      expect(vm.isEditing).to.equal(true);
+    });
+
+    it('isEditing should be true after adding new categories', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      $scope.addCategory();
+      var vm = $scope.categories[$scope.categories.length -1];
+      expect(vm.isEditing).to.equal(true);
+    });
+
+    it('canSave should be false by default for saved categories', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      expect(vm.canSave()).to.equal(false);
+    });
+
+    it('canSave should be true when editing', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      vm.isEditing = true
+      expect(vm.canSave()).to.equal(true);
+      vm.isEditing = false
+      expect(vm.canSave()).to.equal(false);
+    });
+
+    it('canDelete should be true for saved and new categories', function() {
+      var $scope = {};
+      var controller = $controller('RecipeCategoryController', { $scope: $scope, recipeCategoryService: recipeCategoryService });
+      var vm = $scope.categories[0];
+      expect(vm.canDelete()).to.equal(true);
+      $scope.addCategory();
+      vm = $scope.categories[$scope.categories.length -1];
+      expect(vm.canDelete()).to.equal(true);
     });
   });
 });

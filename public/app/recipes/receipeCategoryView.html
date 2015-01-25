@@ -1,11 +1,13 @@
 <div>
-    <h1>Recipe Categories</h1>
+    <h1 class="margin-bottom-15">Recipe Categories</h1>
 
-	<ul>
-   		<li ng-repeat="category in recipeCategories">
-		  <span>{{ category.name }}</span>
-		</li>
-	</ul>
+	<div class="row margin-bottom-10" ng-repeat="vm in categories">
+		<div class="col-xs-3">{{ vm.model.name }}</div>
+		<div class="col-xs-1">
+			<span class="fa fa-save" ng-click="save()"></span>
+			<span class="fa fa-trash-o" ng-click="delete()"></span>
+		</div>
+	</div>
 
-	<a class="btn btn-default" ng-click="createCategory()">Add New</a>
+	<a class="btn btn-default" ng-click="addCategory()">Add New</a>
 </div>

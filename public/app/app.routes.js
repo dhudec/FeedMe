@@ -12,7 +12,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'app/recipes/recipeCreateView.html',
             controller: 'RecipeCreateController'
         })
-        .when('/recipeCategories', {
+        .when('/recipecategories', {
             templateUrl: 'app/recipes/receipeCategoryView.html',
             controller: 'RecipeCategoryController'
         });

@@ -9,3 +9,10 @@ body {
 .left {
 	float: left;
 }
+
+.margin-bottom-10 { margin-bottom: 10px; }
+.margin-bottom-15 { margin-bottom: 15px; }
+.margin-bottom-25 { margin-bottom: 25px; }
+.margin-bottom-50 {	margin-bottom: 50px; }
+.margin-bottom-75 { margin-bottom: 75px; }
+.margin-bottom-100 { margin-bottom: 100px; }

@@ -7,7 +7,9 @@ angular.module('recipes').controller('RecipeCategoryController', function($scope
 	});
 
 	$scope.addCategory = function() {
-		$scope.categories.push(new RecipeCategoryViewModel({ name: '' }));
+		var newCategory = new RecipeCategoryViewModel({ name: '' });
+		newCategory.isEditing = true;
+		$scope.categories.push(newCategory);
 	};
 
 	function RecipeCategoryViewModel(category) {
@@ -15,12 +17,26 @@ angular.module('recipes').controller('RecipeCategoryController', function($scope
 
 		vm.model = category;
 
-		vm.hasBeenSaved = function() {
-			return typeof vm.model._id !== 'undefined';
+		vm.isEditing = false;
+
+		vm.canEdit = function() {
+			return !vm.isEditing;
+		}
+
+		vm.canSave = function() {
+			return vm.isEditing;
+		}
+
+		vm.canDelete = function() {
+			return true;
+		}
+
+		vm.edit = function() {
+			vm.isEditing = true;
 		};
 
 		vm.save = function() {
-			if (vm.hasBeenSaved()) {
+			if (hasBeenSaved()) {
 				recipeCategoryService.update(vm.model._id, vm.model);
 			} else {
 				recipeCategoryService.create(vm.model);
@@ -33,6 +49,10 @@ angular.module('recipes').controller('RecipeCategoryController', function($scope
 				$scope.categories.splice(index, 1);
 			}
 			recipeCategoryService.delete(vm.model._id);
+		};
+
+		var hasBeenSaved = function() {
+			return typeof vm.model._id !== 'undefined';
 		};
 
 		return vm;

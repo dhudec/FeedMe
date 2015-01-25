@@ -6,7 +6,6 @@ describe('public.controllers.RecipeListController', function() {
     module('recipes.mock');
 
     inject(function(_$controller_) {
-      // The injector unwraps the underscores (_) from around the parameter names when matching
       $controller = _$controller_;
     });
   });
