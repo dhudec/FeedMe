@@ -1,8 +1,10 @@
 var assert = require("chai").assert;
-var expect = assert.expect;
+var expect = require("chai").expect;
 var request = require('supertest');
 var mongoose = require('mongoose');
 var log = require('winston'); 
+require('../../../config/test.js');
+
 
 // mock the database
 var mockgoose = require('mockgoose');
@@ -92,6 +94,7 @@ describe('server.controllers.recipes', function(done) {
         assert.equal(updatedRecipe.description, res.body.description);
         assert.equal(updatedRecipe.prepTime, res.body.prepTime);
         assert.equal(updatedRecipe.cookTime, res.body.cookTime);
+        expect(updatedRecipe.cookTime).to.eql(res.body.cookTime);
         //assert.equal(updatedRecipe.categories, res.body.categories);
         done();
       });

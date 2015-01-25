@@ -1,3 +1,4 @@
+require('../../config/test.js');
 var assert = require("chai").assert;
 var request = require('supertest');
 

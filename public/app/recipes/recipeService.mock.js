@@ -1,4 +1,4 @@
-angular.module('recipes.mock', []).factory('recipeService', function($q) {
+angular.module('recipes.mock').factory('recipeService', function() {
     var recipeService = {};
 
     recipeService.get = function() {

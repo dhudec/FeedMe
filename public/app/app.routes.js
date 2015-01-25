@@ -11,6 +11,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/recipes/create', {
             templateUrl: 'app/recipes/recipeCreateView.html',
             controller: 'RecipeCreateController'
+        })
+        .when('/recipeCategories', {
+            templateUrl: 'app/recipes/receipeCategoryView.html',
+            controller: 'RecipeCategoryController'
         });
 
     $locationProvider.html5Mode(true);

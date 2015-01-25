@@ -1,3 +1,4 @@
+require('../../../config/test.js');
 var assert = require("chai").assert;
 var expect = assert.expect;
 var request = require('supertest');

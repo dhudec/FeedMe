@@ -5,14 +5,14 @@ describe('public.controllers.RecipeListController', function() {
     module('recipes');
     module('recipes.mock');
 
-    inject(function(_$controller_){
+    inject(function(_$controller_) {
       // The injector unwraps the underscores (_) from around the parameter names when matching
       $controller = _$controller_;
     });
   });
 
   describe('$scope.recipes', function() {
-    it('should return the recipes returne by the recipe service', function() {
+    it('should return the recipes returned by the recipe service', function() {
       var $scope = {};
       var controller = $controller('RecipeListController', { $scope: $scope });
       

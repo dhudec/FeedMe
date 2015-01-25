@@ -1,3 +1,4 @@
+require('../../../config/test.js');
 var mongoose = require('mongoose');
 var assert = require('chai');
 var expect = assert.expect;

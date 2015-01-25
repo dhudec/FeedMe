@@ -18,7 +18,7 @@ module.exports = function(config) {
       'assets/libs/angular/angular.js',
       'assets/libs/angular-mocks/angular-mocks.js',
       'assets/libs/angular-route/angular-route.js',
-      'app/**/*.module.js',
+      'app/**/*.modules.js',
       'app/**/*.js'
     ],
 
