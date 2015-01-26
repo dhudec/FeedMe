@@ -1,12 +1,27 @@
 <div>
-    <h1>New Recipe</h1>
+    <h3>Create a New Recipe</h3>
 
 	<form name="recipeForm">
-	    <div class="form-group" ng-class="{ 'has-error': recipeForm.name.$invalid }" >
+	    <div class="form-group" ng-class="{ 'has-error': recipeForm.name.$invalid }">
     		<label for="name">Recipe Name:</label>
 	      	<input type="text" class="form-control" name="name" ng-model="recipe.name" required />
 	    </div>
-  </form>
+
+	    <div class="form-group" ng-class="{ 'has-error': recipeForm.description.$invalid }">
+    		<label for="description">Description:</label>
+	      	<input type="text" class="form-control" name="description" ng-model="recipe.description" required />
+	    </div>
+
+	    <div class="form-group" ng-class="{ 'has-error': recipeForm.prepTime.$invalid }">
+    		<label for="prepTime">Prep Time:</label>
+	      	<input type="text" class="form-control" name="prepTime" ng-model="recipe.prepTime" required />
+	    </div>
+
+	    <div class="form-group" ng-class="{ 'has-error': recipeForm.cookTime.$invalid }">
+    		<label for="cookTime">Cook Time:</label>
+	      	<input type="text" class="form-control" name="cookTime" ng-model="recipe.cookTime" required />
+	    </div>
+  	</form>
 
   <a class="btn btn-default" ng-click="create(recipe)">Create</a>
 </div>

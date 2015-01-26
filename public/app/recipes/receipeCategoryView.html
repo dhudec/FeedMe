@@ -1,13 +1,17 @@
 <div>
-    <h1 class="margin-bottom-15">Recipe Categories</h1>
+    <h1 class="margin-bottom-25">Recipe Categories</h1>
 
 	<div class="row margin-bottom-10" ng-repeat="vm in categories">
-		<div class="col-xs-3">{{ vm.model.name }}</div>
+		<div class="col-xs-6" ng-form>
+			<input type="text" name="name" ng-model="vm.model.name" placeholder="Category Name" ng-blur="vm.onEditCompleted()" fm-sync-focus-with="vm.isFocused" required />		
+			<span class="fa fa-remove icon-button margin-left-10" ng-click="vm.delete()"></span>
+		</div>
 		<div class="col-xs-1">
-			<span class="fa fa-save" ng-click="save()"></span>
-			<span class="fa fa-trash-o" ng-click="delete()"></span>
+			<!--<a class="btn btn-default margin-top-15" ng-click="vm.test()">Test</a>-->
+			<!--<span class="fa fa-save" ng-click="save()"></span>-->
 		</div>
 	</div>
 
-	<a class="btn btn-default" ng-click="addCategory()">Add New</a>
+	<a class="btn btn-default margin-top-15 margin-right-25" ng-click="addCategory()">+ Add New</a>
+	<a class="btn btn-default margin-top-15" href="/">Done</a>
 </div>
