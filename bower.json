@@ -1,15 +1,17 @@
 {
-	"name": "feedme",
-	"version": "1.0.0",
-	"dependencies": {
-		"bootstrap": "latest",
-		"font-awesome": "latest",
-		"animate.css": "latest",
-		"angular": "latest",
-		"angular-route": "latest",
-		"angular-toastr": "latest"
-	},
-  	"devDependencies": {
-        "angular-mocks": "latest"
-    }
+  "name": "feedme",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-toastr": "latest",
+    "angular-chosen-localytics": "latest",
+    "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.3.0/chosen_v1.3.0.zip"
+  },
+  "devDependencies": {
+    "angular-mocks": "latest"
+  }
 }

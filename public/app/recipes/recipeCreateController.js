@@ -1,5 +1,13 @@
-angular.module('recipes').controller('RecipeCreateController', function($scope, recipeService) {
+angular.module('recipes').controller('RecipeCreateController', function($scope, recipeService, recipeCategoryService) {
 
-	$scope.create = recipeService.create;
+	$scope.model = {};
+
+	$scope.create = function() {
+		recipeService.create($scope.model);
+	}
+
+	recipeCategoryService.get().then(function(result) {
+		$scope.categories = result.data;
+	});
 	
 });

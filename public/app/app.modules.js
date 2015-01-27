@@ -8,5 +8,5 @@ angular.module('feedMe', [
 	'appRoutes',
 	'common',
 	'home', 
-	'recipes'
+	'recipes','localytics.directives'
 	]);
