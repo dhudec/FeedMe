@@ -5,7 +5,9 @@ module.exports.controller = function(app) {
 
     app.get('/api/recipes', function(req, res) {
         log.info('Request received for GET /api/recipes');
-        Recipe.find(function(err, recipes) {
+        Recipe.find()
+        .populate('categories')
+        .exec(function(err, recipes) {
         	if (!err) {
         		res.json(recipes);
         	} else {
@@ -17,7 +19,9 @@ module.exports.controller = function(app) {
 
     app.get('/api/recipes/:id', function(req, res) {
         log.info('Request received for GET /api/recipes/' + req.params.id);
-        return Recipe.findById(req.params.id, function (err, recipe) {
+        return Recipe.findById(req.params.id)
+        .populate('categories')
+        .exec(function (err, recipe) {
         	if (!err) {
         		res.json(recipe);
         	} else {
@@ -60,8 +64,8 @@ module.exports.controller = function(app) {
         });
     });
 
-    app.delete('/api/recipes', function(req, res) {
-        log.info('Request received for DELETE /api/recipes');
+    app.delete('/api/recipes/:id', function(req, res) {
+        log.info('Request received for DELETE /api/recipes/' + req.params.id);
         Recipe.findById(req.params.id).remove(function (err) {
             if (!err) {
                 res.sendStatus(200);

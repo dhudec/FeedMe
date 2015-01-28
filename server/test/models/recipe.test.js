@@ -64,4 +64,28 @@ describe('server.models.Recipe', function(){
       });
     });
   });
+
+  it('should be able to delete a recipe', function(done) {
+    mockgoose.reset();
+    var recipe = { name: 'Waffles', description: 'Crispy Belgian Waffles', prepTime: 5, cookTime: 15, categories: [ mongoose.Types.ObjectId(), mongoose.Types.ObjectId() ] }
+    var recipeModel = new Recipe(recipe);
+    recipeModel.save(function(err) {
+      expect(err).to.be.a('null');
+
+      Recipe.find(function(err, recipes) {        
+        expect(err).to.be.a('null');
+        expect(recipes.length).to.equal(1);
+
+        var firstRecipe = recipes[0];
+        firstRecipe.remove(function(err) {    
+          expect(err).to.be.a('null');
+          Recipe.find(function(err, recipes) {    
+            expect(err).to.be.a('null');
+            expect(recipes.length).to.equal(0);
+            done();
+          });
+        });
+      });
+    });
+  });
 });

@@ -1,5 +1,7 @@
 var RecipeCategory = require('../models/recipeCategory');
+var Recipe = require('../models/recipe');
 var log = require('winston');
+var async = require('async');
 
 module.exports.controller = function(app) {
 
@@ -56,14 +58,48 @@ module.exports.controller = function(app) {
     });
 
     app.delete('/api/recipeCategories/:id', function(req, res) {
-        log.info('Request received for DELETE /api/recipeCategories/' + req.params.id);
-        RecipeCategory.findById(req.params.id).remove(function (err) {
-            if (!err) {
-                res.sendStatus(200);
-            } else {
+        var categoryId = req.params.id;
+        log.info('Request received for DELETE /api/recipeCategories/' + categoryId);
+        Recipe.find({ 'categories' : { $in : [categoryId] } })
+        .exec(function (err, recipes) {
+            if (err) {
                 log.error(err);
                 res.sendStatus(500);
             }
-        });
+
+            var updates = [];
+            recipes.forEach(function(r) {
+                console.log(r.name);
+                updates.push(function(callback) {
+                    var indexToRemove = r.categories.indexOf(categoryId);
+                    if (indexToRemove > -1) {
+                        r.categories.splice(indexToRemove, 1);
+                        r.save(function (err) {
+                            if (err) 
+                                return callback(err);
+                            callback(null, r);
+                        });
+                    }
+                });
+            });
+
+            async.parallel(updates, function(err, result) {
+                /* this code will run after all calls finished the job or
+                   when any of the calls passes an error */
+                if (err){
+                    log.error(err);
+                    res.sendStatus(500);
+                }
+                
+                RecipeCategory.findById(categoryId).remove(function (err) {
+                    if (!err) {
+                        res.sendStatus(200);
+                    } else {
+                        log.error(err);
+                        res.sendStatus(500);
+                    }
+                });
+            });
+        });        
     });
 }
