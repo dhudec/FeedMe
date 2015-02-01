@@ -4,6 +4,7 @@ angular.module('recipes', []);
 
 angular.module('feedMe', [
 	'ngRoute',
+	'ng-Autocomplete',
 	'toastr',
 	'appRoutes',
 	'common',

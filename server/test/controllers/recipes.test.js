@@ -12,6 +12,7 @@ mockgoose(mongoose);
 var server = require('../../server.js');
 var Recipe = require('../../models/recipe');
 var RecipeCategory = require('../../models/recipeCategory');
+var Ingredient = require('../../models/ingredient');
 
 var chickenCategory,
     dinnerCategory,
@@ -139,16 +140,20 @@ describe('server.controllers.recipes', function(done) {
 
   describe('Relationship between recipe and categories', function(){
     var categories,
+        ingredients,
         reicpe;
 
     before(function() {
       mockgoose.reset();
       RecipeCategory.create([ { name: 'Chicken' }, { name: 'Beef' }], function(err, _categories_) {
         categories = [arguments[1], arguments[2]];
-        var recipeJson = { name: 'My Recipe', categories: categories};
-        var recipeModel = new Recipe(recipeJson);
-        recipeModel.save(function(err, _recipe_) {
-          recipe = _recipe_;
+        Ingredient.create([ { name: 'Chicken Breast' }, { name: 'Parsley' }, { name: 'Potatos' }], function(err, _ingredients_) {
+          ingredients = [arguments[1], arguments[2], arguments[3]];
+          var recipeJson = { name: 'My Recipe', categories: categories, ingredients: [ {item: ingredients[0]}, {item: ingredients[1]}, {item: ingredients[2]} ]};
+          var recipeModel = new Recipe(recipeJson);
+          recipeModel.save(function(err, _recipe_) {
+            recipe = _recipe_;
+          });
         });
       });
     });
@@ -171,6 +176,25 @@ describe('server.controllers.recipes', function(done) {
       });
     });
 
+    it('GET should return populated child ingredient objects', function(done) {
+      request(server)
+      .get('/api/recipes')
+      .expect(200)
+      .end(function (err, res) {
+        if (err) return done(err);
+
+        var recipes = res.body;
+        expect(recipes.length).to.equal(1);
+        expect(recipes[0].ingredients.length).to.equal(3);
+        for (i = 0; i < recipes[0].ingredients.length; i++) {
+          expect(recipes[0].ingredients[i].item).not.to.be.undefined;
+          expect(recipes[0].ingredients[i].item._id).to.equal(ingredients[i]._id.toString());
+          expect(recipes[0].ingredients[i].item.name).to.equal(ingredients[i].name);
+        }
+        done();
+      });
+    });
+
     it('DELETE should not remove related categories', function(done) {
       request(server)
       .delete('/api/recipes/' + recipe._id)
@@ -180,6 +204,20 @@ describe('server.controllers.recipes', function(done) {
 
         RecipeCategory.find(function(err, categories) {
           expect(categories.length).to.equal(2);
+          done();
+        });
+      });
+    });
+
+    it('DELETE should not remove related ingredients', function(done) {
+      request(server)
+      .delete('/api/recipes/' + recipe._id)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) return done(err);
+
+        Ingredient.find(function(err, ingredients) {
+          expect(ingredients.length).to.equal(3);
           done();
         });
       });

@@ -7,6 +7,7 @@ module.exports.controller = function(app) {
         log.info('Request received for GET /api/recipes');
         Recipe.find()
         .populate('categories')
+        .populate('ingredients.item')
         .exec(function(err, recipes) {
         	if (!err) {
         		res.json(recipes);
@@ -21,6 +22,7 @@ module.exports.controller = function(app) {
         log.info('Request received for GET /api/recipes/' + req.params.id);
         return Recipe.findById(req.params.id)
         .populate('categories')
+        .populate('ingredients.item')
         .exec(function (err, recipe) {
         	if (!err) {
         		res.json(recipe);

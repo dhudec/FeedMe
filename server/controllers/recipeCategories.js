@@ -14,7 +14,7 @@ module.exports.controller = function(app) {
                 log.error(err);
                 res.sendStatus(500);
         	}
-        }).populate('recipes');
+        });
     });
 
     app.get('/api/recipeCategories/:id', function(req, res) {
@@ -26,7 +26,7 @@ module.exports.controller = function(app) {
                 log.error(err);
                 res.sendStatus(500);
         	}
-        }).populate('recipes');
+        });
     });
 
     app.post('/api/recipeCategories', function(req, res) {
