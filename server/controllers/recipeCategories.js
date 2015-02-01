@@ -69,7 +69,6 @@ module.exports.controller = function(app) {
 
             var updates = [];
             recipes.forEach(function(r) {
-                console.log(r.name);
                 updates.push(function(callback) {
                     var indexToRemove = r.categories.indexOf(categoryId);
                     if (indexToRemove > -1) {

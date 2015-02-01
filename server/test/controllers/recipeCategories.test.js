@@ -154,7 +154,6 @@ describe('server.controllers.recipeCategories', function(done) {
 
           Recipe.findById(recipe2._id, function (err, _recipe2_) {
             expect(err).to.equal(null);
-            console.log(_recipe2_.categories);
             expect(_recipe2_.categories.length).to.equal(0);
             done();
           });

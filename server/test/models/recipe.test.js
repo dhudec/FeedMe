@@ -25,6 +25,22 @@ describe('server.models.Recipe', function(){
     })
   });
 
+  it('should throw error when saving an ingredient with an invalid unit', function(done){
+    var recipe = new Recipe({ name: 'My Recipe', ingredients: [ { item: new mongoose.Types.ObjectId(), quantity: 1, units: 'metricfuckton' }] });
+    recipe.save(function(err) {
+      expect(err).to.not.be.a('null');
+      done();
+    })
+  });
+
+  it('should be able to save an ingredient with a valid unit', function(done){
+    var recipe = new Recipe({ name: 'My Recipe', ingredients: [ { item: new mongoose.Types.ObjectId(), quantity: 1, units: 'lb' }] });
+    recipe.save(function(err) {
+      expect(err).to.be.a('null');
+      done();
+    })
+  });
+
   it('should be able to save and find a recipe without a category', function(done) {
     mockgoose.reset();
     var recipe = { name: 'Waffles', description: 'Crispy Belgian Waffles', prepTime: 5, cookTime: 15 }
