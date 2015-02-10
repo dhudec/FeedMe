@@ -131,21 +131,6 @@ describe('server.controllers.ingredients', function(done) {
       });
     });
 
-    it('DELETE should return a 200 status when deleting an ingredient not used by any recipes', function(done) {
-      request(server)
-      .delete('/api/ingredients/' + parsleyIngredient._id)
-      .expect(200)
-      .end(function (err, res) {
-        console.log(err);
-        expect(err).not.to.be.a('null');
-        Ingredient.find(function(err, ingredients) {
-          if (err) return done(err);
-          expect(ingredients.length).to.equal(2);
-          done();
-        });
-      });
-    });
-
     it('DELETE should return a 409 error when deleting an ingredient used by at least one existing recipe', function(done) {
       request(server)
       .delete('/api/ingredients/' + chickenIngredient._id)
@@ -154,9 +139,23 @@ describe('server.controllers.ingredients', function(done) {
           if (err) return done(err);
           Ingredient.find(function(err, ingredients) {
             expect(err).to.be.a('null');
-            expect(ingredients.length).to.equal(1);
+            expect(ingredients.length).to.equal(2);
             done();
           });
+      });
+    });
+
+    it('DELETE should return a 200 status when deleting an ingredient not used by any recipes', function(done) {
+      request(server)
+      .delete('/api/ingredients/' + parsleyIngredient._id)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) return done(err);
+        Ingredient.find(function(err, ingredients) {
+          expect(err).to.be.a('null');
+          expect(ingredients.length).to.equal(1);
+          done();
+        });
       });
     });
   });

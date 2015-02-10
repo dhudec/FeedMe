@@ -9,17 +9,34 @@
 
 	    <div class="form-group" ng-class="{ 'has-error': recipeForm.description.$invalid }">
     		<label for="description">Description:</label>
-	      	<textarea class="form-control" name="description" ng-model="model.description" required></textarea>
+	      	<textarea class="form-control" name="description" ng-model="model.description"></textarea>
 	    </div>
 
 	    <div class="form-group" ng-class="{ 'has-error': recipeForm.prepTime.$invalid }">
     		<label for="prepTime">Prep Time:</label>
-	      	<input type="number" class="form-control max-width-100" name="prepTime" ng-model="model.prepTime" required />
+	      	<input type="number" class="form-control max-width-100" name="prepTime" ng-model="model.prepTime" />
 	    </div>
 
 	    <div class="form-group" ng-class="{ 'has-error': recipeForm.cookTime.$invalid }">
     		<label for="cookTime">Cook Time:</label>
-	      	<input type="number" class="form-control max-width-100" name="cookTime" ng-model="model.cookTime" required />
+	      	<input type="number" class="form-control max-width-100" name="cookTime" ng-model="model.cookTime" />
+	    </div>
+
+	    <div class="form-group" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
+    		<label for="instructions">Instructions:</label>
+	      	<textarea class="form-control min-height-150" name="instructions" ng-model="model.instructions"></textarea>
+	    </div>
+
+	    <div class="form-group" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
+	    	<label for="instructions">Ingredients:</label>
+	    	<span class="icon-button fa fa-plus fa-lg margin-left-25" ng-click="addIngredient()"/>
+	      	<div class="row margin-top-10" ng-repeat="ingredient in model.ingredients">
+	      		<div class="col-xs-12 col-md-7 vcenter"><input type="text" class="form-control" ng-model="ingredient.item.name"/></div>
+	      		<div class="col-xs-2 col-md-1 vcenter">Quantity:</div>
+	      		<div class="col-xs-2 col-md-1 vcenter"><input type="text" class="form-control max-width-100" ng-model="ingredient.quantity"/></div>
+	      		<div class="col-xs-2 col-md-1 vcenter"><select class="form-control" chosen data-placeholder="Units" ng-options="unit for unit in units" ng-model="ingredient.units"/></div>
+	      		<div class="col-xs-1 vcenter"><span class="icon-button fa fa-remove fa-lg" ng-click="removeIngredient(ingredient)"/></div>
+	      	</div>
 	    </div>
 
 	    <div class="form-group max-width-300" ng-class="{ 'has-error': recipeForm.categories.$invalid }">

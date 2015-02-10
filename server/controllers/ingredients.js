@@ -1,5 +1,6 @@
 var Ingredient = require('../models/ingredient');
 var Recipe = require('../models/recipe');
+var Units = require('../models/units');
 var log = require('winston');
 var async = require('async');
 
@@ -15,6 +16,11 @@ module.exports.controller = function(app) {
                 res.sendStatus(500);
         	}
         });
+    });
+
+    app.get('/api/ingredients/units', function(req, res) {
+        log.info('Request received for GET /api/ingredients/units');
+        res.json(Units.ingredientUnits);
     });
 
     app.post('/api/ingredients', function(req, res) {
@@ -47,18 +53,16 @@ module.exports.controller = function(app) {
 
     app.delete('/api/ingredients/:id', function(req, res) {
         var ingredientId = req.params.id;
-        console.log(ingredientId);
         log.info('Request received for DELETE /api/ingredients/' + ingredientId);
-        Recipe.count({ 'ingredients.item' : { $in : [ingredientId] } }) //todo: this line is incorrect.
-        .exec(function (err, ingredients) {
-            console.log(ingredients);
+        Recipe.count({ 'ingredients.item' : ingredientId }) //todo: this line is incorrect.
+        .exec(function (err, count) {
             if (err) {
                 log.error(err);
                 res.sendStatus(500);
             }
 
-            if (ingredients > 0) {
-                log.warning("Request rejected to delete ingredient because this ingredient is referenced by " + ingredients + " recipes.")
+            if (count > 0) {
+                log.warn("Request rejected to delete ingredient because this ingredient is referenced by " + count + " recipes.")
                 res.sendStatus(409);
             } else {
                 Ingredient.findById(ingredientId).remove(function(err) {

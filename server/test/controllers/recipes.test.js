@@ -18,6 +18,7 @@ var chickenCategory,
     dinnerCategory,
     breakfastCategory,
     testRecipe,
+    testIngredient,
     insertedRecipe;
 
 describe('server.controllers.recipes', function(done) {
@@ -54,6 +55,45 @@ describe('server.controllers.recipes', function(done) {
         done();
       });
     });
+
+    it('should create new ingredients', function(done) {
+      testRecipe.name = 'Recipe with ingredients';
+      testRecipe.ingredients = [ {item: {name: 'Chicken Breast'}, quantity: 1, units: 'lb'} ];
+      request(server)
+      .post('/api/recipes')
+      .send(testRecipe)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) return done(err);
+
+        Ingredient.find(function(err, ingredients) {
+          expect(err).to.be.a('null');
+          expect(ingredients.length).to.equal(1);
+          expect(ingredients[0].name).to.equal(testRecipe.ingredients[0].item.name);
+          testIngredient = ingredients[0];
+          done();
+        });
+      });
+    });
+
+    it('should reference existing ingredients without creating a new ingredient', function(done) {
+      testRecipe.name = 'Another recipe with the same ingredients';
+      testRecipe.ingredients = [ {item: {name: testIngredient.name}, quantity: 2, units: 'lb'} ];
+      request(server)
+      .post('/api/recipes')
+      .send(testRecipe)
+      .expect(200)
+      .end(function (err, res) {
+        if (err) return done(err);
+
+        Ingredient.find(function(err, ingredients) {
+          expect(err).to.be.a('null');
+          expect(ingredients.length).to.equal(1);
+          expect(ingredients[0].name).to.equal(testRecipe.ingredients[0].item.name);
+          done();
+        });
+      });
+    });
   });
 
   describe('GET /api/recipes', function() {
@@ -69,7 +109,7 @@ describe('server.controllers.recipes', function(done) {
       .end(function (err, res) {
         if (err) return done(err);
 
-        assert.isTrue(res.body.length == 1);
+        assert.isTrue(res.body.length == 3);
         assert.equal(insertedRecipe._id, res.body[0]._id);
         assert.equal(insertedRecipe.name, res.body[0].name);
         assert.equal(insertedRecipe.categories.length, res.body[0].categories.length);
@@ -122,7 +162,7 @@ describe('server.controllers.recipes', function(done) {
 
     it('should respond with 200 status and remove the recipe', function(done) {
       Recipe.find(function(err, recipes) {
-          expect(recipes.length).to.equal(1);
+          expect(recipes.length).to.equal(3);
         request(server)
         .delete('/api/recipes/' + insertedRecipe._id)
         .expect(200)
@@ -130,7 +170,7 @@ describe('server.controllers.recipes', function(done) {
           if (err) return done(err);
 
           Recipe.find(function(err, recipes) {
-            expect(recipes.length).to.equal(0);
+            expect(recipes.length).to.equal(2);
             done();
           });
         });

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-
-var supportedUnits = 'lb; oz; c; qt; gal; tsp; tbsp; dash; pinch; to taste'.split('; ');
+var Units = require('./units');
 
 var RecipeSchema = new mongoose.Schema({
 	name: {type: String, required: true},
@@ -8,7 +7,7 @@ var RecipeSchema = new mongoose.Schema({
 	prepTime: {type: Number},
 	cookTime: {type: Number},
 	instructions: {type: String},
-	ingredients: [ { quantity: {type: Number}, units: {type: String, enum: supportedUnits}, item: {type: mongoose.Schema.ObjectId, ref: 'Ingredient'} } ],
+	ingredients: [ { quantity: {type: Number}, units: {type: String, enum: Units.ingredientUnits}, item: {type: mongoose.Schema.ObjectId, ref: 'Ingredient'} } ],
     categories: [ {type: mongoose.Schema.ObjectId, ref: 'RecipeCategory'} ]
 });
 

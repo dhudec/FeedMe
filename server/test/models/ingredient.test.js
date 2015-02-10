@@ -106,4 +106,18 @@ describe('server.models.Ingredient', function(){
       });
     });
   });
+
+  it('should throw error when saving multiple ingredients with the same name', function(done){
+    mockgoose.reset();
+    var ingredient = new Ingredient({ name: 'Steak' });
+    ingredient.save(function(err) {
+      expect(err).to.be.a('null');
+
+      var duplicate = new Ingredient({ name: 'Steak' });
+      duplicate.save(function(err) {
+        expect(err).to.not.be.a('null');
+        done();
+      })
+    })
+  });
 });
