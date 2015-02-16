@@ -21,7 +21,7 @@ describe('public.app.ingredients.ingredientService', function () {
       var responseData = [ 'lb', 'oz' ];
       httpBackend.expectGET('/api/ingredients/units').respond(200, responseData);
       
-      var returnedPromise = ingredientService.get();
+      var returnedPromise = ingredientService.getUnits();
       var result;
       returnedPromise.then(function(response) {
         result = response;

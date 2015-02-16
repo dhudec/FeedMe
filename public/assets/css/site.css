@@ -1,8 +1,5 @@
 body { padding-top: 50px; }
 
-.right { float: right; }
-.left { float: left; }
-
 .icon-button { cursor: pointer; }
 .icon-button:hover { color: #dd4814; }
 
@@ -12,6 +9,20 @@ body { padding-top: 50px; }
   	color: #555;
   	border: 1px solid #ccc;
 }
+
+.select-units {
+	min-width: 75px;
+}
+
+.recipe-image {
+	height: 100px;
+	width: 100px;
+}
+
+/* GENERIC CSS */
+
+.right { float: right; }
+.left { float: left; }
 
 .vcenter {
 	display: inline-block;
@@ -23,6 +34,7 @@ body { padding-top: 50px; }
 .min-height-150 { min-height: 150px; }
 .min-height-200 { min-height: 200px; }
 
+.max-width-75 { max-width: 75px; }
 .max-width-100 { max-width: 100px; }
 .max-width-200 { max-width: 200px; }
 .max-width-300 { max-width: 300px; }

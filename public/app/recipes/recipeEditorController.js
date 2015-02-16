@@ -1,4 +1,12 @@
-angular.module('recipes').controller('RecipeCreateController', function($scope, recipeService, recipeCategoryService, ingredientService) {
+angular.module('recipes').controller('RecipeEditorController', function($scope, $location, $routeParams, toastr, recipeService, recipeCategoryService, ingredientService) {
+
+	var parseRouteParams = function() {
+		if (typeof $routeParams.id !== 'undefined') {
+			recipeService.get($routeParams.id).then(function(result) {
+				$scope.model = result.data;
+			})
+		}
+	}
 
 	var addIngredient = function() {
 		$scope.model.ingredients.push({item:{}});
@@ -22,21 +30,28 @@ angular.module('recipes').controller('RecipeCreateController', function($scope, 
 		});
 	}
 
-	var createRecipe = function() {
+	var saveRecipe = function() {
 		$scope.model.ingredients.forEach(function(ingredient, index, array) {
 			if (typeof ingredient.item.name === 'undefined' || ingredient.item.name == '')
 				array.splice(index, 1);
 		});
-		recipeService.create($scope.model);
+		recipeService.create($scope.model).then(function() {
+			$location.path('/recipes');
+			toastr.success("Recipe saved.");
+		}, function (err) {
+			toastr.error("An error occurred while saving. " + err);			
+		});
 	}
 
 	var initialize = function() {
 		$scope.model = {};
 		$scope.model.ingredients = [];
+		$scope.localImage = {};
 		$scope.addIngredient = addIngredient;
 		$scope.removeIngredient = removeIngredient;
-		$scope.create = createRecipe;
+		$scope.save = saveRecipe;
 
+		parseRouteParams();
 		addIngredient();
 		getRecipeCategories();
 		getIngredientUnits();

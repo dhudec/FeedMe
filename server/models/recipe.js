@@ -8,7 +8,8 @@ var RecipeSchema = new mongoose.Schema({
 	cookTime: {type: Number},
 	instructions: {type: String},
 	ingredients: [ { quantity: {type: Number}, units: {type: String, enum: Units.ingredientUnits}, item: {type: mongoose.Schema.ObjectId, ref: 'Ingredient'} } ],
-    categories: [ {type: mongoose.Schema.ObjectId, ref: 'RecipeCategory'} ]
+    categories: [ {type: mongoose.Schema.ObjectId, ref: 'RecipeCategory'} ],
+    image: {type: String}
 });
 
 RecipeSchema.index({'categories': 1});

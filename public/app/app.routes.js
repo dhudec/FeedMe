@@ -8,9 +8,17 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'app/recipes/recipeListView.html',
             controller: 'RecipeListController'
         })
+        .when('/recipes/:id', {
+            templateUrl: 'app/recipes/recipeView.html',
+            controller: 'RecipeController'
+        })
         .when('/recipes/create', {
-            templateUrl: 'app/recipes/recipeCreateView.html',
-            controller: 'RecipeCreateController'
+            templateUrl: 'app/recipes/recipeEditorView.html',
+            controller: 'RecipeEditorController'
+        })
+        .when('/recipes/update/:id', {
+            templateUrl: 'app/recipes/recipeEditorView.html',
+            controller: 'RecipeEditorController'
         })
         .when('/recipecategories', {
             templateUrl: 'app/recipes/receipeCategoryView.html',
