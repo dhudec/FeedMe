@@ -1,41 +1,49 @@
 describe('public.controllers.RecipeController', function() {
   var $controller,
       $location,
+      $routeParams = { id: 'id123' },
       $rootScope,
-      $scope;  
+      $scope,
+      toastr,
+      recipeService;  
 
   beforeEach(function () {
     module('recipes');
     module('recipes.mock');
+    module('toastr.mock');
 
-    inject(function(_$controller_, _$location_, _$rootScope_) {
+    inject(function(_$controller_, _$location_, _$rootScope_, _toastr_, _recipeService_) {
       $controller = _$controller_;
       $location = _$location_;
       $rootScope = _$rootScope_;
+      toastr = _toastr_;
+      recipeService = _recipeService_;
     });
   });
 
   beforeEach(function() {
     $scope = {};
-    var controller = $controller('RecipeController', { $scope: $scope });
+    var controller = $controller('RecipeController', { $scope: $scope, $routeParams: $routeParams });
     $rootScope.$apply(); // promises are resolved/dispatched only on next $digest cycle
   });
 
-/*
+
   describe('constructor', function() {
-    it('should call get on the ', function() {
-      expect($scope.recipes).to.have.property('length', 2);
-      expect($scope.recipes[0].name).to.equal('recipe 1');
-      expect($scope.recipes[1].name).to.equal('recipe 2');
+    it('should call getById on the recipeService with the id provided in the routeParams', function() {
+      expect(recipeService.getByIdWasCalled).to.equal(true);
+      expect(recipeService.getByIdArgs).to.equal($routeParams.id);
+    });
+
+    it('should set the model a recipe with the id provided by the routeParams', function() {
+      expect($scope.model._id).to.equal($routeParams.id);
     });
   });
 
-  describe('$scope.open', function() {
-    it('should navigate to the details page', function() {
-      var recipe = { _id: 'abc' };
-      $scope.open(recipe);
-      expect($location.path()).to.equal('/recipes/' + recipe._id);
+  describe('$scope.edit', function() {
+    it('should navigate to the update page', function() {
+      $scope.model = { _id: 'abc', name: 'recipe' };
+      $scope.edit();
+      expect($location.path()).to.equal('/recipes/update/' + $scope.model._id);
     });
   });
-*/
 });

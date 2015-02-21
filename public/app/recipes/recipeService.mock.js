@@ -1,12 +1,26 @@
 angular.module('recipes.mock').factory('recipeService', function($q) {
     var recipeService = {};
 
+    recipeService.getWasCalled = false;
     recipeService.get = function() {
         var deferred = $q.defer();
-		deferred.resolve({ data: [
+		var result = { data: [
         	{ name: 'recipe 1', description: 'description 1', prepTime: 1, cookTime: 2, _id: '1234' },
 			{ name: 'recipe 2', description: 'description 2', prepTime: 3, cookTime: 4, _id: '5678' } 
-		] });
+		] };
+        recipeService.getWasCalled = true;
+        deferred.resolve(result);
+        return deferred.promise;
+    };
+
+    recipeService.getByIdWasCalled = false;
+    recipeService.getByIdArgs = null;
+    recipeService.getById = function(id) {
+        var deferred = $q.defer();
+        var result = { data: { name: 'recipe 1', description: 'description 1', prepTime: 1, cookTime: 2, _id: id } };
+        recipeService.getByIdWasCalled = true;
+        recipeService.getByIdArgs = id;
+        deferred.resolve(result);
         return deferred.promise;
     };
 
@@ -37,6 +51,6 @@ angular.module('recipes.mock').factory('recipeService', function($q) {
         recipeService.deleteWasCalled = true;
         recipeService.deleteArgs = id;
     };
-    
+
     return recipeService;
   });

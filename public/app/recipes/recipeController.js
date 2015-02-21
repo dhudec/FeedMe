@@ -1,15 +1,11 @@
-angular.module('recipes').controller('RecipeController', function($scope, $location, $routeParams, recipeService) {
+angular.module('recipes').controller('RecipeController', function($scope, $location, $routeParams, recipeService, toastr) {
 
     var loadRecipe = function() {
     	if (typeof $routeParams.id !== 'undefined') {
-    		recipeService.get($routeParams.id).then(function(result) {
+    		recipeService.getById($routeParams.id).then(function(result) {
 			    $scope.model = result.data;
-
-			    $scope.recipes.forEach(function(recipe) {
-			    	recipe.totalTime = function() {
-				    	return recipe.prepTime + recipe.cookTime;
-				    }
-			    });
+		  	}, function (err) {
+				toastr.error("An error occurred while loading the recipe. " + err);	
 		  	});
 		}
     }
