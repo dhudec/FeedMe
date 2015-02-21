@@ -4,7 +4,7 @@ describe('public.services.recipeService', function () {
       httpBackend;
   
   beforeEach(function (){  
-    module('recipes');
+    module('recipes.services');
     
     inject(function($httpBackend, _$rootScope_, _recipeService_) {
       recipeService = _recipeService_;

@@ -1,7 +1,8 @@
 angular.module('common', []);
 angular.module('home', []);
-angular.module('ingredients', []);
-angular.module('recipes', []);
+angular.module('ingredients.services', []);
+angular.module('recipes.controllers', []);
+angular.module('recipes.services', []);
 
 angular.module('feedMe', [
 	'ngRoute',
@@ -9,7 +10,8 @@ angular.module('feedMe', [
 	'appRoutes',
 	'common',
 	'home', 
-	'ingredients',
-	'recipes',
+	'ingredients.services',
+	'recipes.controllers',
+	'recipes.services',
 	'localytics.directives'
 	]);

@@ -1,4 +1,4 @@
-angular.module('recipes').factory('recipeCategoryService', ['$http', function($http) {
+angular.module('recipes.services').factory('recipeCategoryService', ['$http', function($http) {
     var service = {};
 
     service.get = function() {

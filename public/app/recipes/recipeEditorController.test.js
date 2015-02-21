@@ -10,9 +10,9 @@ describe('public.controllers.RecipeEditorController', function() {
       ingredientService;  
 
   beforeEach(function () {
-    module('recipes');
-    module('recipes.mock');
-    module('ingredients.mock');
+    module('recipes.controllers');
+    module('recipes.services.mock');
+    module('ingredients.services.mock');
     module('toastr.mock');
 
     inject(function(_$controller_, _$location_, _$rootScope_, _toastr_, _recipeService_, _recipeCategoryService_, _ingredientService_) {

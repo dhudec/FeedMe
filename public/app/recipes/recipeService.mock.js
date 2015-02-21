@@ -1,4 +1,4 @@
-angular.module('recipes.mock').factory('recipeService', function($q) {
+angular.module('recipes.services.mock').factory('recipeService', function($q) {
     var recipeService = {};
 
     recipeService.getWasCalled = false;

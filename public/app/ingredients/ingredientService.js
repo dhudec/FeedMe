@@ -1,4 +1,4 @@
-angular.module('ingredients').factory('ingredientService', ['$http', function($http) {
+angular.module('ingredients.services').factory('ingredientService', ['$http', function($http) {
     var service = {};
 
     service.getUnits = function() {

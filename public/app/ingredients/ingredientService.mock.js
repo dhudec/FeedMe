@@ -1,4 +1,4 @@
-angular.module('ingredients.mock').factory('ingredientService', function($q) {
+angular.module('ingredients.services.mock').factory('ingredientService', function($q) {
     var service = {};
 
     service.getUnits = function() {

@@ -1,4 +1,4 @@
-angular.module('recipes').controller('RecipeCategoryController', function($scope, toastr, recipeCategoryService) {
+angular.module('recipes.controllers').controller('RecipeCategoryController', function($scope, toastr, recipeCategoryService) {
 
     recipeCategoryService.get().then(function(result) {
 		$scope.categories = result.data.map(function(category) {

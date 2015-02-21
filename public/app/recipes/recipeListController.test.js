@@ -5,8 +5,8 @@ describe('public.controllers.RecipeListController', function() {
       $scope;  
 
   beforeEach(function () {
-    module('recipes');
-    module('recipes.mock');
+    module('recipes.controllers');
+    module('recipes.services.mock');
 
     inject(function(_$controller_, _$location_, _$rootScope_) {
       $controller = _$controller_;

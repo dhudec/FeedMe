@@ -1,4 +1,4 @@
-angular.module('recipes').factory('recipeService', function($http, $q) {
+angular.module('recipes.services').factory('recipeService', function($http, $q) {
     var recipeService = {};
 
     recipeService.get = function() {

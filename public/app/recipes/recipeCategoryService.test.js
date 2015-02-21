@@ -3,7 +3,7 @@ describe('public.services.recipeCategoryService', function () {
       httpBackend;
   
   beforeEach(function (){  
-    module('recipes');
+    module('recipes.services');
     
     inject(function($httpBackend, _recipeCategoryService_) {
       recipeCategoryService = _recipeCategoryService_;      

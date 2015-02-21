@@ -1,4 +1,4 @@
-angular.module('recipes').controller('RecipeEditorController', function($scope, $location, $routeParams, toastr, recipeService, recipeCategoryService, ingredientService) {
+angular.module('recipes.controllers').controller('RecipeEditorController', function($scope, $location, $routeParams, toastr, recipeService, recipeCategoryService, ingredientService) {
 
 	var parseRouteParams = function() {
 		if (typeof $routeParams.id !== 'undefined') {

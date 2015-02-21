@@ -3,7 +3,7 @@ describe('public.app.ingredients.ingredientService', function () {
       httpBackend;
   
   beforeEach(function (){  
-    module('ingredients');
+    module('ingredients.services');
     
     inject(function($httpBackend, _ingredientService_) {
       ingredientService = _ingredientService_;      

@@ -6,8 +6,8 @@ describe('public.controllers.RecipeCategoryController', function() {
       recipeCategoryService;  
 
   beforeEach(function () {
-    module('recipes');
-    module('recipes.mock');
+    module('recipes.controllers');
+    module('recipes.services.mock');
     module('toastr.mock');
 
     inject(function(_$controller_, _$rootScope_, _recipeCategoryService_) {

@@ -1,4 +1,4 @@
-angular.module('recipes').controller('RecipeController', function($scope, $location, $routeParams, recipeService, toastr) {
+angular.module('recipes.controllers').controller('RecipeController', function($scope, $location, $routeParams, recipeService, toastr) {
 
     var loadRecipe = function() {
     	if (typeof $routeParams.id !== 'undefined') {

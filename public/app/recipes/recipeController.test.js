@@ -8,8 +8,8 @@ describe('public.controllers.RecipeController', function() {
       recipeService;  
 
   beforeEach(function () {
-    module('recipes');
-    module('recipes.mock');
+    module('recipes.controllers');
+    module('recipes.services.mock');
     module('toastr.mock');
 
     inject(function(_$controller_, _$location_, _$rootScope_, _toastr_, _recipeService_) {
