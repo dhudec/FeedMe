@@ -1,12 +1,10 @@
-angular.module('recipes').controller('RecipeListController', function($scope, recipeService) {
+angular.module('recipes').controller('RecipeListController', function($scope, $location, recipeService) {
 
     recipeService.get().then(function(result) {
 	    $scope.recipes = result.data;
-
-	    $scope.recipes.forEach(function(recipe) {
-	    	recipe.totalTime = function() {
-		    	return recipe.prepTime + recipe.cookTime;
-		    }
-	    });
 	  });
+
+    $scope.open = function(recipe) {
+		$location.path('/recipes/' + recipe._id);
+    }
 });

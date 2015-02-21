@@ -31,16 +31,29 @@ angular.module('recipes').controller('RecipeEditorController', function($scope, 
 	}
 
 	var saveRecipe = function() {
-		$scope.model.ingredients.forEach(function(ingredient, index, array) {
-			if (typeof ingredient.item.name === 'undefined' || ingredient.item.name == '')
-				array.splice(index, 1);
-		});
-		recipeService.create($scope.model).then(function() {
-			$location.path('/recipes');
-			toastr.success("Recipe saved.");
-		}, function (err) {
-			toastr.error("An error occurred while saving. " + err);			
-		});
+		if (typeof $scope.model.ingredients !== 'undefined') {
+			for (var i = $scope.model.ingredients.length - 1; i > -1; i--) {
+				var ingredient = $scope.model.ingredients[i];
+				if (typeof ingredient.item ==='undefined' || typeof ingredient.item.name === 'undefined' || !ingredient.item.name.length)
+					$scope.model.ingredients.splice(i, 1);
+			}
+		}
+
+		if (typeof $scope.model._id === 'undefined') {
+			recipeService.create($scope.model).then(function() {
+				$location.path('/recipes');
+				toastr.success("Recipe saved.");
+			}, function (err) {
+				toastr.error("An error occurred while saving. " + err);			
+			});
+		} else {			
+			recipeService.update($scope.model).then(function() {
+				$location.path('/recipes/' + $scope.model._id);
+				toastr.success("Recipe saved.");
+			}, function (err) {
+				toastr.error("An error occurred while saving. " + err);			
+			});
+		}
 	}
 
 	var initialize = function() {
