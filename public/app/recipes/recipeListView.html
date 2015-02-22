@@ -3,7 +3,7 @@
 
 	<div class="row">
    		<div ng-repeat="recipe in recipes" class="col-xs-12 col-md-4 margin-bottom-50 link" ng-click="open(recipe)">
-			<img class="recipe-image" src="/assets/data/default-recipe.jpg"/>
+			<img class="recipe-image-sm" src="/assets/data/default-recipe.jpg"/>
 			<h4><b>{{ recipe.name }}</b></h4>
 			<div><i>{{ recipe.description }}</i></div>
 			<div>Time: {{ recipe.totalTime() }} minutes</div>

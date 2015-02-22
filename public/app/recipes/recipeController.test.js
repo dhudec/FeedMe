@@ -46,4 +46,16 @@ describe('public.controllers.RecipeController', function() {
       expect($location.path()).to.equal('/recipes/update/' + $scope.model._id);
     });
   });
+
+  describe('$scope.showCategories', function() {
+    it('should be false if the model has no categories', function() {
+      $scope.model = { _id: 'abc', name: 'recipe', categories: [] };
+      expect($scope.showCategories()).to.equal(false);
+    });
+
+    it('should be true if the model has any categories', function() {
+      $scope.model = { _id: 'abc', name: 'recipe', categories: [ { name: 'Category' } ] };
+      expect($scope.showCategories()).to.equal(true);
+    });
+  });
 });

@@ -1,5 +1,12 @@
 body { padding-top: 50px; }
 
+h1 { font-size: 2.1em; font-weight: bold; color: #666; }
+h2 { font-size: 1.55em; font-weight: bold; color: #666; }
+h3 { font-size: 1.17em; font-weight: bold; color: #666; }
+
+.page-container { background: #ffffff; }
+.page-content { background: #ffffff; }
+
 .icon-button { cursor: pointer; }
 .icon-button:hover { color: #dd4814; }
 
@@ -14,9 +21,19 @@ body { padding-top: 50px; }
 	min-width: 75px;
 }
 
-.recipe-image {
+.recipe-image-sm {
 	height: 100px;
 	width: 100px;
+}
+
+.recipe-image-md {
+	height: 200px;
+	width: 200px;
+}
+
+.recipe-image-lg {
+	height: 275px;
+	width: 275px;
 }
 
 /* GENERIC CSS */

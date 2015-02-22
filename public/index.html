@@ -31,7 +31,7 @@
 	    <script type="text/javascript" src="app/ingredients/ingredientService.js"></script>
 	    <script type="text/javascript" src="app/recipes/recipeController.js"></script>
 	    <script type="text/javascript" src="app/recipes/recipeListController.js"></script>
-	    <script type="text/javascript" src="app/recipes/recipeCreateController.js"></script>
+	    <script type="text/javascript" src="app/recipes/recipeEditorController.js"></script>
 	    <script type="text/javascript" src="app/recipes/recipeService.js"></script>
 	    <script type="text/javascript" src="app/recipes/recipeCategoryController.js"></script>
 	    <script type="text/javascript" src="app/recipes/recipeCategoryService.js"></script>	   
@@ -53,6 +53,8 @@
 	        </div>
 	    </nav>
 
-	    <div ng-view class="container"></div>
+	    <div class="page-container">
+	    	<div ng-view class="container page-content"></div>
+	    </div>
 	</body>
 </html>	

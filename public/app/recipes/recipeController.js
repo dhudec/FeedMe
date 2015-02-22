@@ -14,9 +14,14 @@ angular.module('recipes.controllers').controller('RecipeController', function($s
 		$location.path('/recipes/update/' + $scope.model._id);
     }
 
+    var showCategories = function () {
+        return $scope.model.categories.length > 0;
+    };
+
     var initialize = function () {
     	loadRecipe();
-		$scope.edit = edit;    	
+		$scope.edit = edit;
+        $scope.showCategories = showCategories;
     }
 
     initialize();
