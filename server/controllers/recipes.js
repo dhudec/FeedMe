@@ -39,6 +39,9 @@ module.exports.controller = function(app) {
     app.post('/api/recipes', function(req, res) {
         log.info('Request received for POST /api/recipes');
         var recipe = req.body;
+
+        flattenCategoryReferences(recipe);
+
         resolveIngredientReferences(recipe).then(function(recipe) {
             var recipeModel = new Recipe(recipe);
             recipeModel.save(function(err) {
@@ -54,6 +57,53 @@ module.exports.controller = function(app) {
             res.sendStatus(500);
         });    	
     });
+
+    app.put('/api/recipes/:id', function(req, res) {
+        log.info('Request received for PUT /api/recipes/' + req.params.id);
+        var recipe = req.body;
+        if (recipe._id !== req.params.id)
+            return res.sendStatus(400);
+
+        flattenCategoryReferences(recipe);
+
+        resolveIngredientReferences(recipe).then(function(recipe) {
+            //var recipeModel = new Recipe(recipe);
+            return Recipe.update({_id: recipe._id}, recipe, function(err) {
+              if (!err) {
+                res.json(recipe);
+              } else {
+                log.error(err);
+                res.sendStatus(500);
+              }
+            });
+        }, function (err) {
+            log.error(err);
+            res.sendStatus(500);
+        }); 
+    });
+
+    app.delete('/api/recipes/:id', function(req, res) {
+        log.info('Request received for DELETE /api/recipes/' + req.params.id);
+        Recipe.findById(req.params.id).remove(function (err) {
+            if (!err) {
+                res.sendStatus(200);
+            } else {
+                log.error(err);
+                res.sendStatus(500);
+            }
+        });
+    });
+
+    var flattenCategoryReferences = function(recipe) {
+        if (typeof(recipe.categories) !== 'undefined') {
+            for (var i = 0; i < recipe.categories.length; i++) {
+                var category = recipe.categories[i];
+                if (typeof category._id !== 'undefined') {
+                    recipe.categories[i] = category._id;
+                }
+            }
+        }
+    }
 
     var resolveIngredientReferences = function(recipe) {
         var deferred = q.defer();
@@ -86,42 +136,9 @@ module.exports.controller = function(app) {
                 log.error(err);
                 deferred.reject(err);
             }
-            
             deferred.resolve(recipe);
         });
 
         return deferred.promise;
     }
-
-    app.put('/api/recipes/:id', function(req, res) {
-        log.info('Request received for PUT /api/recipes/' + req.params.id);
-        return Recipe.findById(req.params.id, function(err, recipe) {
-            recipe.name = req.body.name;
-            recipe.description = req.body.description;
-            recipe.prepTime = req.body.prepTime;
-            recipe.cookTime = req.body.cookTime;
-            recipe.categories = req.body.categories;
-
-            return recipe.save(function(err) {
-              if (!err) {
-                res.json(recipe);
-              } else {
-                log.error(err);
-                res.sendStatus(500);
-              }
-            });
-        });
-    });
-
-    app.delete('/api/recipes/:id', function(req, res) {
-        log.info('Request received for DELETE /api/recipes/' + req.params.id);
-        Recipe.findById(req.params.id).remove(function (err) {
-            if (!err) {
-                res.sendStatus(200);
-            } else {
-                log.error(err);
-                res.sendStatus(500);
-            }
-        });
-    });
 }

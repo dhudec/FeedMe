@@ -1,7 +1,7 @@
 <div class="margin-top-25">    
     <div class="row">
     	<div class="col-md-4">
-	  		<img class="recipe-image-lg" src="/assets/data/default-recipe.jpg"/>
+	  		<img class="recipe-image-lg" src="/assets/data/default-recipe.png"/>
 	  	</div>
   		<div class="col-md-8">
   			<div class="margin-top-10 margin-bottom-10 row">
@@ -17,17 +17,19 @@
 					<h3>Cook Time</h3>
 					<span ng-cloak>{{model.cookTime || 0}} mins</span>
 					<h3 class="margin-top-25">Prep Time</h3>
-					<span ng-cloak>{{model.PrepTime || 0}} mins</span>
+					<span ng-cloak>{{model.prepTime || 0}} mins</span>
 				</div>
   			</div>
   		</div>
   	</div>
 
   	<h2 class="margin-top-50">Ingredients</h2>
-  	<div ng-repeat="ingredient in model.ingredients">
+  	<div ng-repeat="ingredient in model.ingredients" class="margin-top-10">
   		<span>{{ingredient.quantity}} {{ingredient.units}} {{ingredient.item.name}}</span>
   	</div>
 
   	<h2 class="margin-top-50">Instructions</h2>
-    <p>{{model.instructions}}</p>
+    <p class="pre">{{model.instructions}}</p>
+
+    <a class="btn btn-default margin-top-50" ng-click="edit()">Edit</a>
 </div>

@@ -33,7 +33,7 @@ describe('public.controllers.RecipeListController', function() {
     it('should navigate to the details page', function() {
       var recipe = { _id: 'abc' };
       $scope.open(recipe);
-      expect($location.path()).to.equal('/recipes/' + recipe._id);
+      expect($location.path()).to.equal('/recipes/details/' + recipe._id);
     });
   });
 });

@@ -8,7 +8,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'app/recipes/recipeListView.html',
             controller: 'RecipeListController'
         })
-        .when('/recipes/:id', {
+        .when('/recipes/details/:id', {
             templateUrl: 'app/recipes/recipeView.html',
             controller: 'RecipeController'
         })

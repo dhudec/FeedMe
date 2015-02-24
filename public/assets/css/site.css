@@ -4,6 +4,8 @@ h1 { font-size: 2.1em; font-weight: bold; color: #666; }
 h2 { font-size: 1.55em; font-weight: bold; color: #666; }
 h3 { font-size: 1.17em; font-weight: bold; color: #666; }
 
+.navbar-brand { padding: 10px 15px; }
+.brand { height: 35px; }
 .page-container { background: #ffffff; }
 .page-content { background: #ffffff; }
 
@@ -17,26 +19,17 @@ h3 { font-size: 1.17em; font-weight: bold; color: #666; }
   	border: 1px solid #ccc;
 }
 
-.select-units {
-	min-width: 75px;
-}
+.select-units { min-width: 75px; }
 
-.recipe-image-sm {
-	height: 100px;
-	width: 100px;
-}
+.recipe-image-sm { height: 100px; width: 100px; }
 
-.recipe-image-md {
-	height: 200px;
-	width: 200px;
-}
+.recipe-image-md { height: 200px; width: 200px; }
 
-.recipe-image-lg {
-	height: 275px;
-	width: 275px;
-}
+.recipe-image-lg { height: 275px; width: 275px; }
 
 /* GENERIC CSS */
+.pre { white-space: pre-line;}
+
 .link { cursor: pointer; }
 
 .right { float: right; }

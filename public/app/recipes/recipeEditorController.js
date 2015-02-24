@@ -1,10 +1,19 @@
 angular.module('recipes.controllers').controller('RecipeEditorController', function($scope, $location, $routeParams, toastr, recipeService, recipeCategoryService, ingredientService) {
 
+	var isUpdating = false;
+
+	var title = function() {
+		return isUpdating ? 'Edit Recipe' : 'Create a New Recipe';
+	}
+
 	var parseRouteParams = function() {
 		if (typeof $routeParams.id !== 'undefined') {
-			recipeService.get($routeParams.id).then(function(result) {
+			isUpdating = true;
+			recipeService.getById($routeParams.id).then(function(result) {
 				$scope.model = result.data;
-			})
+			}, function (err) {
+				toastr.error("An error occurred while loading the recipe. " + err);	
+		  	});
 		}
 	}
 
@@ -30,7 +39,7 @@ angular.module('recipes.controllers').controller('RecipeEditorController', funct
 		});
 	}
 
-	var saveRecipe = function() {
+	var save = function() {
 		if (typeof $scope.model.ingredients !== 'undefined') {
 			for (var i = $scope.model.ingredients.length - 1; i > -1; i--) {
 				var ingredient = $scope.model.ingredients[i];
@@ -48,7 +57,7 @@ angular.module('recipes.controllers').controller('RecipeEditorController', funct
 			});
 		} else {			
 			recipeService.update($scope.model).then(function() {
-				$location.path('/recipes/' + $scope.model._id);
+				$location.path('/recipes/details/' + $scope.model._id);
 				toastr.success("Recipe saved.");
 			}, function (err) {
 				toastr.error("An error occurred while saving. " + err);			
@@ -56,13 +65,22 @@ angular.module('recipes.controllers').controller('RecipeEditorController', funct
 		}
 	}
 
+	var cancel = function() {
+		if (isUpdating)
+			$location.path('/recipes/details/' + $scope.model._id);
+		else
+			$location.path('/recipes');
+	}
+
 	var initialize = function() {
 		$scope.model = {};
 		$scope.model.ingredients = [];
 		$scope.localImage = {};
+		$scope.title = title;
 		$scope.addIngredient = addIngredient;
 		$scope.removeIngredient = removeIngredient;
-		$scope.save = saveRecipe;
+		$scope.save = save;
+		$scope.cancel = cancel;
 
 		parseRouteParams();
 		addIngredient();

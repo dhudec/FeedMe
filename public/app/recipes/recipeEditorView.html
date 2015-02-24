@@ -1,33 +1,28 @@
 <div>
-    <h3>Create a New Recipe</h3>
+    <h2>{{title()}}</h2>
 
 	<div ng-form name="recipeForm">
-	    <div class="form-group" ng-class="{ 'has-error': recipeForm.name.$invalid }">
+	    <div class="form-group margin-top-50" ng-class="{ 'has-error': recipeForm.name.$invalid }">
     		<label for="name">Recipe Name:</label>
 	      	<input type="text" class="form-control" name="name" ng-model="model.name" required />
 	    </div>
 
-	    <div class="form-group" ng-class="{ 'has-error': recipeForm.description.$invalid }">
+	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.description.$invalid }">
     		<label for="description">Description:</label>
 	      	<textarea class="form-control" name="description" ng-model="model.description"></textarea>
 	    </div>
 
-	    <div class="form-group" ng-class="{ 'has-error': recipeForm.prepTime.$invalid }">
+	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.prepTime.$invalid }">
     		<label for="prepTime">Prep Time:</label>
 	      	<input type="number" class="form-control max-width-100" name="prepTime" ng-model="model.prepTime" />
 	    </div>
 
-	    <div class="form-group" ng-class="{ 'has-error': recipeForm.cookTime.$invalid }">
+	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.cookTime.$invalid }">
     		<label for="cookTime">Cook Time:</label>
 	      	<input type="number" class="form-control max-width-100" name="cookTime" ng-model="model.cookTime" />
 	    </div>
 
-	    <div class="form-group" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
-    		<label for="instructions">Instructions:</label>
-	      	<textarea class="form-control min-height-150" name="instructions" ng-model="model.instructions"></textarea>
-	    </div>
-
-	    <div class="form-group" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
+	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
 	    	<label for="instructions">Ingredients:</label>
 	    	<span class="icon-button fa fa-plus fa-lg margin-left-25" ng-click="addIngredient()"/>
 	      	<div class="row margin-top-10" ng-repeat="ingredient in model.ingredients">
@@ -47,16 +42,23 @@
 	      	</div>
 	    </div>
 
-	    <div class="form-group max-width-300" ng-class="{ 'has-error': recipeForm.categories.$invalid }">
+	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
+    		<label for="instructions">Instructions:</label>
+	      	<textarea class="form-control min-height-150" name="instructions" ng-model="model.instructions"></textarea>
+	    </div>
+
+	    <div class="form-group max-width-300 margin-top-25" ng-class="{ 'has-error': recipeForm.categories.$invalid }">
     		<label for="categories">Categories:</label>
 		    <select name="categories" class="form-control" chosen multiple data-placeholder="Choose a category [optional]" ng-model="model.categories" ng-options="c.name for c in categories"></select>
 	    </div>
 
-	    <div class="form-group">
+	    <div class="form-group margin-top-25">
     		<label for="local-image">Image:</label>
-	      	<input type="number" class="form-control max-width-100" name="local-image" ng-model="localImage" />
+	      	<!--<input type="number" class="form-control max-width-100" name="local-image" ng-model="localImage" />-->
+	      	<i>Need to add a way to caputure and upload images here...</i>
 	    </div>
   	</div>
 
   <a class="btn btn-default" ng-click="save()">Save</a>
+  <a class="btn btn-default margin-left-25" ng-click="cancel()">Cancel</a>
 </div>

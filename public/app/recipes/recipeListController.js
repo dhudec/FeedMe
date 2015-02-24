@@ -5,6 +5,6 @@ angular.module('recipes.controllers').controller('RecipeListController', functio
 	  });
 
     $scope.open = function(recipe) {
-		$location.path('/recipes/' + recipe._id);
+		$location.path('/recipes/details/' + recipe._id);
     }
 });

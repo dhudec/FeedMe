@@ -3,7 +3,7 @@ describe('public.controllers.RecipeEditorController', function() {
       $location,
       $rootScope,
       $scope,
-      $routeParams = {},
+      $routeParams,
       toastr,
       recipeService,
       recipeCategoryService,
@@ -14,7 +14,9 @@ describe('public.controllers.RecipeEditorController', function() {
     module('recipes.services.mock');
     module('ingredients.services.mock');
     module('toastr.mock');
-
+    
+    $routeParams = {};
+    
     inject(function(_$controller_, _$location_, _$rootScope_, _toastr_, _recipeService_, _recipeCategoryService_, _ingredientService_) {
       $controller = _$controller_;
       $location = _$location_;
@@ -27,14 +29,36 @@ describe('public.controllers.RecipeEditorController', function() {
   });
 
   beforeEach(function() {
+    initializeController();
+  })
+
+  var initializeController = function() {
     $scope = {};
     var controller = $controller('RecipeEditorController', { $scope: $scope, $location: $location, $routeParams: $routeParams, recipeService: recipeService, recipeCategoryService: recipeCategoryService, ingredientService: ingredientService });
     $rootScope.$apply(); // promises are resolved/dispatched only on next $digest cycle
-  })
+  }
 
   describe('$scope.model', function() {
-    it('should be defined', function() {
+    it('should be defined when creating a new recipe', function() {
       expect($scope.model).not.to.be.undefined;
+    });
+
+    it('should not call recipeService.getById when creating a new recipe', function() {
+      expect($scope.model).not.to.be.undefined;
+      expect(recipeService.getByIdWasCalled).to.equal(false);
+    });
+
+    it('should call recipeService.getById when updating a recipe', function() {
+      $routeParams = { id: 'id123' };
+      initializeController();
+      expect(recipeService.getByIdWasCalled).to.equal(true);
+      expect(recipeService.getByIdArgs).to.equal($routeParams.id);
+    });
+
+    it('should set $scope.model to an instance with _id = $routeParams.id', function() {
+      $routeParams = { id: 'id123' };
+      initializeController();
+      expect($scope.model._id).to.equal($routeParams.id);
     });
   });
 
@@ -83,7 +107,7 @@ describe('public.controllers.RecipeEditorController', function() {
       expect(arg.ingredients[0].item.name).to.equal('name');
     });
 
-    it('should navigate to the /recipes age', function() {
+    it('should navigate to the /recipes page', function() {
       $scope.model = { name: 'test' };
       $scope.save();
       $rootScope.$digest();
@@ -113,6 +137,39 @@ describe('public.controllers.RecipeEditorController', function() {
       $scope.save();
       $rootScope.$digest();
       expect(toastr.successWasCalled).to.equal(true);
+    });
+  });
+
+  describe('$scope.cancel when $routeParams.id is defined', function() {
+    it('should navigate back to the recipe details page without saving', function() {
+      $routeParams = { id: 'abc123'}
+      initializeController();
+      $scope.cancel();
+      expect($location.path()).to.equal('/recipes/details/' + $routeParams.id)
+      expect(recipeService.createWasCalled).to.equal(false);
+      expect(recipeService.updateWasCalled).to.equal(false);
+    });
+  });
+
+  describe('$scope.cancel when $routeParams.id is defined', function() {
+    it('should navigate back to the recipe list page without saving', function() {
+      $scope.cancel();
+      expect($location.path()).to.equal('/recipes')
+      expect(recipeService.createWasCalled).to.equal(false);
+      expect(recipeService.updateWasCalled).to.equal(false);
+    });
+  });
+
+  describe('$scope.title', function() {
+    it('should equal Create a New Recipe when not updating', function () {
+      expect($scope.title()).to.equal('Create a New Recipe');
+    });
+
+    it('should equal Edit Recipe when updating', function () {
+      $routeParams = { id: 'id123' };
+      initializeController();
+
+      expect($scope.title()).to.equal('Edit Recipe');
     });
   });
 });
