@@ -1,4 +1,4 @@
-describe('public.controllers.RecipeListController', function() {
+describe('public.app.recipes.RecipeListController', function() {
   var $controller,
       $location,
       $rootScope,

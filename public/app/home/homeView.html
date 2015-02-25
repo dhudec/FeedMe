@@ -1,5 +1,38 @@
-<div class="jumbotron text-center">
-    <h1>Standard Home Page</h1>
+<header>
+	<div class="container">
+		<div class="margin-top-50 margin-bottom-50">
+			<img class="header-logo img-responsive" src="/assets/img/logo.png"/>
+			<img class="header-img img-responsive margin-top-5" src="/assets/img/header-img.png"/>
+			<h2 class="margin-top-25 header">
+				<span>Store Recipes</span>
+				<span class="margin-left-10 margin-right-10 fa fa-star"></span>
+				<span>Plan Meals</span>
+				<span class="margin-left-10 margin-right-10 fa fa-star"></span> 
+				<span>Build Shopping Lists</span>
+			</h2>
+		</div>
+	</div>
+</header>
 
-    <p>{{ tagline }}</p>
-</div>
+<div class="container margin-top-50">
+	<div class="row">
+		<div class="col-sm-4 col-xs-12">
+			<div class="module-btn btn-info" ng-click="gotoRecipes()">
+				<span class="fa fa-spoon fa-lg"></span>
+				<span class="margin-left-25">Recipes</span>
+			</div>
+		</div>
+		<div class="col-sm-4 col-xs-12">
+			<div class="module-btn btn-info" ng-click="gotoMenus()">
+				<span class="fa fa-book fa-lg"></span>
+				<span class="margin-left-25">Menus</span>
+			</div>
+		</div>
+		<div class="col-sm-4 col-xs-12">
+			<div class="module-btn btn-info" ng-click="gotoShoppingLists()">
+				<span class="fa fa-shopping-cart fa-lg"></span>
+				<span class="margin-left-25">Shopping Lists</span>
+			</div>
+		</div>
+	</div>		
+</div>	

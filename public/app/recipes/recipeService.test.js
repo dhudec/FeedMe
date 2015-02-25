@@ -1,4 +1,4 @@
-describe('public.services.recipeService', function () {
+describe('public.app.recipes.recipeService', function () {
   var recipeService,
       $rootScope,
       httpBackend;

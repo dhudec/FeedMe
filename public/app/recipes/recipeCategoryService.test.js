@@ -1,4 +1,4 @@
-describe('public.services.recipeCategoryService', function () {
+describe('public.app.recipes.recipeCategoryService', function () {
   var recipeCategoryService,
       httpBackend;
   

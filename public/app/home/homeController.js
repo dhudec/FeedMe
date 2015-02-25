@@ -1,5 +1,22 @@
-angular.module('home').controller('HomeController', function($scope) {
+angular.module('home.controllers').controller('HomeController', function($scope, $location) {
+ 
+	var gotoRecipes = function() {
+		$location.path('/recipes');
+	}
 
-    $scope.tagline = 'Where\'s the food?';   
+	var gotoMenus = function() {
+		$location.path('/menus');
+	}
 
+	var gotoShoppingLists = function() {
+		$location.path('/shoppinglists');
+	}
+
+	var initialize = function() {
+		$scope.gotoRecipes = gotoRecipes;
+		$scope.gotoMenus = gotoMenus;
+		$scope.gotoShoppingLists = gotoShoppingLists;
+	}
+
+	initialize();
 });

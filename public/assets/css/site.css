@@ -1,9 +1,11 @@
 body { padding-top: 50px; }
+header { background: #AFA093; display: block; text-align: center; color: #ffffff; background-image: url('/assets/img/checkered-bg.png'); }
 
 h1 { font-size: 2.1em; font-weight: bold; color: #666; }
 h2 { font-size: 1.55em; font-weight: bold; color: #666; }
 h3 { font-size: 1.17em; font-weight: bold; color: #666; }
 
+.header { color: #ffffff;}
 .navbar-brand { padding: 10px 15px; }
 .brand { height: 35px; }
 .page-container { background: #ffffff; }
@@ -11,6 +13,18 @@ h3 { font-size: 1.17em; font-weight: bold; color: #666; }
 
 .icon-button { cursor: pointer; }
 .icon-button:hover { color: #dd4814; }
+
+.header-img { max-height: 200px; margin: 0 auto 0; }
+.header-logo { max-height: 100px; margin: 0 auto 0; }
+
+.module-btn { 
+	background-image: url('/assets/img/checkered-bg.png'); 
+	color: #ffffff;
+	font-size:18px;
+	margin: 20px 0;
+	padding: 25px 10px 25px 35px;
+	cursor: pointer;
+}
 
 .chosen-choices { 
 	border-radius: 4px;

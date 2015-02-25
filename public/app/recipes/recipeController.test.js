@@ -1,4 +1,4 @@
-describe('public.controllers.RecipeController', function() {
+describe('public.app.recipes.RecipeController', function() {
   var $controller,
       $location,
       $routeParams = { id: 'id123' },

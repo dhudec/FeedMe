@@ -4,6 +4,7 @@ angular.module('routes', []).config(['$routeProvider', '$locationProvider', func
             templateUrl: 'app/home/homeView.html',
             controller: 'HomeController'
         })
+
         .when('/recipes', {
             templateUrl: 'app/recipes/recipeListView.html',
             controller: 'RecipeListController'
@@ -23,7 +24,17 @@ angular.module('routes', []).config(['$routeProvider', '$locationProvider', func
         .when('/recipecategories', {
             templateUrl: 'app/recipes/recipeCategoryView.html',
             controller: 'RecipeCategoryController'
-        });
+        })
+
+        .when('/menus', {
+            templateUrl: 'app/menus/menuListView.html',
+            controller: 'MenuListController'
+        })
+
+        .when('/shoppinglists', {
+            templateUrl: 'app/shoppinglists/shoppinglistListView.html',
+            controller: 'ShoppingListListController'
+        })
 
     $locationProvider.html5Mode(true);
 }]);
