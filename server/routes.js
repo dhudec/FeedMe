@@ -12,6 +12,6 @@ module.exports = function(app) {
 
     // frontend routes =========================================================
     app.get('*', function(req, res) {
-        res.sendFile('index.html', { root: path.join(__dirname, '../public') }); // load the single page app container
+      res.sendFile('index.html', { root: path.join(__dirname, '../public') });
     });
 };

@@ -1,4 +1,4 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'app/home/homeView.html',
@@ -21,7 +21,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'RecipeEditorController'
         })
         .when('/recipecategories', {
-            templateUrl: 'app/recipes/receipeCategoryView.html',
+            templateUrl: 'app/recipes/recipeCategoryView.html',
             controller: 'RecipeCategoryController'
         });
 

@@ -67,7 +67,6 @@ module.exports.controller = function(app) {
         flattenCategoryReferences(recipe);
 
         resolveIngredientReferences(recipe).then(function(recipe) {
-            //var recipeModel = new Recipe(recipe);
             return Recipe.update({_id: recipe._id}, recipe, function(err) {
               if (!err) {
                 res.json(recipe);

@@ -7,7 +7,7 @@ angular.module('recipes.services', []);
 angular.module('feedMe', [
 	'ngRoute',
 	'toastr',
-	'appRoutes',
+	'routes',
 	'common',
 	'home', 
 	'ingredients.services',
