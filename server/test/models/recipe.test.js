@@ -43,7 +43,7 @@ describe('server.models.Recipe', function(){
 
   it('should be able to save and find a recipe without a category', function(done) {
     mockgoose.reset();
-    var recipe = { name: 'Waffles', description: 'Crispy Belgian Waffles', prepTime: 5, cookTime: 15 }
+    var recipe = { name: 'Waffles', description: 'Crispy Belgian Waffles', prepTime: 5, cookTime: 15, instructions: 'do this, do that', image: 'http://google.com/img.png' }
     var recipeModel = new Recipe(recipe);
     recipeModel.save(function(err) {
     	expect(err).to.be.a('null');

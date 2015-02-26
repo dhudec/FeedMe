@@ -1,4 +1,6 @@
-angular.module('common').directive('fmSyncFocusWith', function($timeout, $rootScope) {
+var common = angular.module('common')
+
+common.directive('fmSyncFocusWith', function($timeout, $rootScope) {
   return {
     restrict: 'A',
     scope: {
@@ -11,7 +13,18 @@ angular.module('common').directive('fmSyncFocusWith', function($timeout, $rootSc
         } else if (currentValue === false) { // && previousValue) {
           $element[0].blur();
         }
-      })
+      });
+    }
+  }
+});
+
+common.directive('fmRecipeImg', function() {
+  return {
+   restrict: "A",
+    link: function($scope, $element, attrs) {
+      attrs.$observe('fmRecipeImg', function(val) {
+        $element.attr('src', val || "/assets/data/default-recipe.png");
+      });
     }
   }
 });
