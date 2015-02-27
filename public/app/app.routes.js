@@ -15,15 +15,18 @@ angular.module('routes', []).config(['$routeProvider', '$locationProvider', func
         })
         .when('/recipes/create', {
             templateUrl: 'app/recipes/recipeEditorView.html',
-            controller: 'RecipeEditorController'
+            controller: 'RecipeEditorController',
+            css: 'assets/css/recipes/recipeEditor.css'
         })
         .when('/recipes/update/:id', {
             templateUrl: 'app/recipes/recipeEditorView.html',
-            controller: 'RecipeEditorController'
+            controller: 'RecipeEditorController',
+            css: 'assets/css/recipes/recipeEditor.css'
         })
         .when('/recipecategories', {
             templateUrl: 'app/recipes/recipeCategoryView.html',
-            controller: 'RecipeCategoryController'
+            controller: 'RecipeCategoryController',
+            css: 'assets/css/recipes/recipeCategory.css'
         })
 
         .when('/menus', {

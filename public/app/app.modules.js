@@ -17,5 +17,6 @@ angular.module('feedMe', [
 	'recipes.controllers',
 	'recipes.services',
 	'shoppinglists.controllers',
-	'localytics.directives'
+	'localytics.directives',
+	'routeStyles'
 	]);

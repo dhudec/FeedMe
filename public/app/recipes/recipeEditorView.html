@@ -25,7 +25,7 @@
 	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
 	    	<label for="instructions">Ingredients:</label>
 	    	<span class="icon-button fa fa-plus fa-lg margin-left-25" ng-click="addIngredient()"/>
-	      	<div class="row margin-top-10" ng-repeat="ingredient in model.ingredients">
+	      	<div class="row margin-top-10 ingredient-container" ng-repeat="ingredient in model.ingredients">
 	      		<div class="col-xs-11">
       				<div class="row">
 						<div class="col-xs-12 col-md-7 margin-bottom-10"><input type="text" class="form-control" ng-model="ingredient.item.name"/></div>
@@ -38,7 +38,7 @@
 			      		</div>
       				</div>
 	      		</div>
-	      		<div class="col-xs-1"><span class="icon-button fa fa-remove fa-lg right margin-top-10" ng-click="removeIngredient(ingredient)"/>
+	      		<div class="col-xs-1"><span class="icon-button fa fa-trash fa-lg right margin-top-10" ng-click="removeIngredient(ingredient)"/>
 	      	</div>
 	    </div>
 
