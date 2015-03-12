@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container margin-bottom-50">
     <h2>{{title()}}</h2>
 
 	<div ng-form name="recipeForm">
@@ -23,17 +23,35 @@
 	    </div>
 
 	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
-	    	<label for="instructions">Ingredients:</label>
+	    	<label>Ingredients:</label>
 	    	<span class="icon-button fa fa-plus fa-lg margin-left-25" ng-click="addIngredient()"/>
 	      	<div class="row margin-top-10 ingredient-container" ng-repeat="ingredient in model.ingredients">
 	      		<div class="col-xs-11">
       				<div class="row">
-						<div class="col-xs-12 col-md-7 margin-bottom-10"><input type="text" class="form-control" ng-model="ingredient.item.name"/></div>
-			      		<div class="col-xs-11 col-md-4 margin-bottom-10">
-			      			<span class="vcenter">Quantity:</span>
-			      			<input type="text" class="form-control max-width-75 margin-left-10 vcenter" ng-model="ingredient.quantity"/>
-			      			<div class="vcenter margin-left-10 max-width-100">
-			      				<select chosen="{inherit_select_classes:true}" class="select-units" data-placeholder="Units" ng-options="unit for unit in units" ng-model="ingredient.units"/>
+						<div class="col-xs-12 col-md-5 margin-bottom-10">
+							<input type="text" class="form-control" ng-model="ingredient.item.name"/>
+						</div>
+			      		<div class="col-xs-12 col-sm-5 col-md-3 margin-bottom-10">
+			      			<div class="row">
+		      					<div class="col-xs-2 col-md-3 margin-top-10">
+		      						<span>Note:</span>
+		      					</div>
+		      					<div class="col-xs-10 col-md-9">
+					      			<input type="text" class="form-control" ng-model="ingredient.note"/>
+		      					</div>
+			      			</div>
+			      		</div>
+			      		<div class="col-xs-12 col-sm-7 col-md-4 margin-bottom-10">
+			      			<div class="row">
+		      					<div class="col-xs-2 col-md-3 margin-top-10">
+			      					<span>Quantity:</span>
+		      					</div>
+		      					<div class="col-xs-10 col-md-9">
+					      			<input type="text" class="form-control max-width-75 vcenter" ng-model="ingredient.quantity"/>
+					      			<div class="vcenter margin-left-10 max-width-100">
+					      				<select chosen="{inherit_select_classes:true}" class="select-units" data-placeholder="Units" ng-options="unit for unit in units" ng-model="ingredient.units"/>
+					      			</div>
+		      					</div>
 			      			</div>
 			      		</div>
       				</div>
