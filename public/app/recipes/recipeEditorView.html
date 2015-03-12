@@ -14,12 +14,18 @@
 
 	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.prepTime.$invalid }">
     		<label for="prepTime">Prep Time:</label>
-	      	<input type="number" class="form-control max-width-100" name="prepTime" ng-model="model.prepTime" />
+    		<div>
+		      	<input type="number" class="form-control max-width-100 vcenter" name="prepTime" ng-model="model.prepTime" />
+		      	<span class="vcenter margin-left-10">mins</span>
+		      </div>
 	    </div>
 
 	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.cookTime.$invalid }">
     		<label for="cookTime">Cook Time:</label>
-	      	<input type="number" class="form-control max-width-100" name="cookTime" ng-model="model.cookTime" />
+	      	<div>
+				<input type="number" class="form-control max-width-100 vcenter" name="cookTime" ng-model="model.cookTime" />
+		      	<span class="vcenter margin-left-10">mins</span>
+	      	</div>
 	    </div>
 
 	    <div class="form-group margin-top-25" ng-class="{ 'has-error': recipeForm.instructions.$invalid }">
