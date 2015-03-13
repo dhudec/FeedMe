@@ -1,4 +1,4 @@
-angular.module('recipes.controllers').controller('RecipeEditorController', function($scope, $location, $routeParams, toastr, recipeService, recipeCategoryService, ingredientService) {
+angular.module('recipes.controllers').controller('RecipeEditorController', function($scope, $location, $routeParams, _, toastr, recipeService, recipeCategoryService, ingredientService) {
 
 	var isUpdating = false;
 
@@ -25,6 +25,10 @@ angular.module('recipes.controllers').controller('RecipeEditorController', funct
 		var index = $scope.model.ingredients.indexOf(ingredient);
 		if (index > -1)
 			$scope.model.ingredients.splice(index, 1);
+	}
+
+	var getSelectedCategoryIds = function() {
+		return _.pluck($scope.model.categories, '_id');
 	}
 
 	var getRecipeCategories = function() {
@@ -75,7 +79,6 @@ angular.module('recipes.controllers').controller('RecipeEditorController', funct
 	var initialize = function() {
 		$scope.model = {};
 		$scope.model.ingredients = [];
-		$scope.localImage = {};
 		$scope.title = title;
 		$scope.addIngredient = addIngredient;
 		$scope.removeIngredient = removeIngredient;

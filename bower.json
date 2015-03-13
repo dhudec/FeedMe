@@ -10,7 +10,8 @@
     "angular-toastr": "latest",
     "angular-chosen-localytics": "latest",
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.3.0/chosen_v1.3.0.zip",
-    "angular-route-styles": "*"
+    "angular-route-styles": "*",
+    "underscore": "~1.8.2"
   },
   "devDependencies": {
     "angular-mocks": "latest"

@@ -18,5 +18,6 @@ angular.module('feedMe', [
 	'recipes.services',
 	'shoppinglists.controllers',
 	'localytics.directives',
-	'routeStyles'
+	'routeStyles',
+	'underscore'
 	]);

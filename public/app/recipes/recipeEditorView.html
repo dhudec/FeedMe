@@ -73,7 +73,7 @@
 
 	    <div class="form-group max-width-300 margin-top-25" ng-class="{ 'has-error': recipeForm.categories.$invalid }">
     		<label for="categories">Categories:</label>
-		    <select name="categories" class="form-control" chosen multiple data-placeholder="Choose a category [optional]" ng-model="model.categories" ng-options="c.name for c in categories"></select>
+		    <select name="categories" class="form-control" chosen multiple data-placeholder="Choose a category [optional]" ng-model="model.categories" ng-options="c as c.name for c in categories track by c._id"></select>
 	    </div>
 
 	    <div class="form-group margin-top-25">
