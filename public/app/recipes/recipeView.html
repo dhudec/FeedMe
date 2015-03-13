@@ -31,7 +31,7 @@
 
   	<h2 class="margin-top-50">Ingredients</h2>
   	<div ng-repeat="ingredient in model.ingredients" class="margin-top-10">
-  		<span>{{ingredient.quantity}} {{ingredient.units}} &nbsp; {{ingredient.item.name}}, {{ingredient.note}}</span>
+  		<span>{{ingredient.quantity}} {{ingredient.units}} &nbsp; {{ingredient.item.name}}<span ng-show="ingredient.note">, {{ingredient.note}}</span></span>
   	</div>
 
   	<h2 class="margin-top-50">Instructions</h2>
