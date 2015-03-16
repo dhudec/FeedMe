@@ -9,6 +9,7 @@ angular.module('shoppinglists.controllers', []);
 angular.module('feedMe', [
 	'ngRoute',
 	'toastr',
+	'underscore',
 	'routes',
 	'common',
 	'home.controllers', 
@@ -18,6 +19,5 @@ angular.module('feedMe', [
 	'recipes.services',
 	'shoppinglists.controllers',
 	'localytics.directives',
-	'routeStyles',
-	'underscore'
+	'routeStyles'
 	]);
